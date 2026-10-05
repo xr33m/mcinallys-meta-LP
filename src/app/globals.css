@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #1a2332;
+  --color-teal: #158090;
+  --color-teal-dark: #126471;
+  --color-teal-bright: #1a9cab;
+  --color-teal-tint: #e8f4f6;
+  --color-brand: #ffc107;
+  --color-brand-dark: #e6ac00;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 12px;
+}
+
+body {
+  background: #fff;
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* leave room so the sticky bar never covers the footer on mobile */
+@media (max-width: 767px) {
+  body { padding-bottom: 76px; }
+}
