@@ -9,22 +9,22 @@ export const metadata: Metadata = {
 
 export default function ThankYou() {
   return (
-    <main className="flex flex-1 items-center justify-center bg-teal-tint px-4 py-12">
-      <div className="w-full max-w-md rounded-2xl bg-white p-7 text-center shadow-sm ring-1 ring-slate-200">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal text-white">
+    <main className="stripes flex flex-1 items-center justify-center bg-navy px-4 py-12">
+      <div className="w-full max-w-md border-2 border-navy bg-white p-7 text-center shadow-hard-y">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center bg-brand text-navy border-2 border-navy">
           <Check className="h-7 w-7" />
         </span>
-        <h1 className="mt-4 text-2xl font-extrabold">You&rsquo;re booked in the queue</h1>
-        <p className="mt-2 text-slate-600">
+        <h1 className="h-display mt-4 text-4xl">Request received</h1>
+        <p className="mt-2 text-navy/70">
           Thanks, we&rsquo;ve got your request for the £{offer.price} Autumn Boiler Service. {site.owner} will call you{" "}
           {offer.callbackWindow} to agree a day and time.
         </p>
-        <p className="mt-4 text-sm text-slate-500">Need us sooner? Reach us directly:</p>
+        <p className="mt-4 text-sm text-navy/60">Need us sooner? Reach us directly:</p>
         <div className="mt-3 flex flex-col gap-2.5">
-          <a href={site.phoneHref} className="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-teal font-bold text-white">
+          <a href={site.phoneHref} className="btn bg-navy text-white">
             <Phone /> Call {site.phoneDisplay}
           </a>
-          <a href={site.whatsappHref} className="flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 border-teal font-bold text-teal">
+          <a href={site.whatsappHref} className="btn bg-white">
             <WhatsApp /> WhatsApp us
           </a>
         </div>

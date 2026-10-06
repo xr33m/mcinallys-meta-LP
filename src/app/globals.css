@@ -1,26 +1,37 @@
-@import "tailwindcss";
-
-@theme inline {
-  --color-navy: #1a2332;
-  --color-teal: #158090;
-  --color-teal-dark: #126471;
-  --color-teal-bright: #1a9cab;
-  --color-teal-tint: #e8f4f6;
-  --color-brand: #ffc107;
-  --color-brand-dark: #e6ac00;
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 12px;
 }
 
 body {
   background: #fff;
-  color: var(--color-navy);
-  font-family: var(--font-sans);
+  color: #1a2332;
   -webkit-tap-highlight-color: transparent;
+}
+
+@layer components {
+  .h-display {
+    @apply font-display font-extrabold uppercase leading-[0.95] tracking-tight;
+  }
+  .kicker {
+    @apply font-display text-sm font-bold uppercase tracking-[0.18em] text-teal;
+  }
+  .btn {
+    @apply inline-flex min-h-14 items-center justify-center gap-2 border-2 border-navy px-6 font-display text-xl font-extrabold uppercase tracking-wide transition active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+  .btn-yellow {
+    @apply btn bg-brand text-navy shadow-hard hover:bg-brand-dark;
+  }
+  .stripes {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 14px,
+      rgba(255, 255, 255, 0.035) 14px 28px
+    );
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

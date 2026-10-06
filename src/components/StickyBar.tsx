@@ -28,7 +28,7 @@ export function StickyBar() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-3 pt-2 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur transition-transform duration-300 md:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-50 border-t-2 border-navy bg-white px-3 pt-2 transition-transform duration-300 md:hidden ${
         show ? "translate-y-0" : "translate-y-full"
       }`}
       style={{ paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))" }}
@@ -38,7 +38,7 @@ export function StickyBar() {
         <a
           href="#book"
           tabIndex={show ? 0 : -1}
-          className="flex min-h-12 flex-1 items-center justify-center rounded-xl bg-brand px-4 text-base font-extrabold text-navy"
+          className="flex min-h-12 flex-1 items-center justify-center border-2 border-navy bg-brand font-display text-xl font-extrabold uppercase tracking-wide text-navy"
         >
           Book £{offer.price} service
         </a>
@@ -46,7 +46,7 @@ export function StickyBar() {
           href={site.whatsappHref}
           tabIndex={show ? 0 : -1}
           aria-label="WhatsApp us"
-          className="flex min-h-12 w-12 items-center justify-center rounded-xl bg-navy text-white"
+          className="flex min-h-12 w-12 items-center justify-center border-2 border-navy bg-white text-navy"
         >
           <WhatsApp />
         </a>
@@ -54,7 +54,7 @@ export function StickyBar() {
           href={site.phoneHref}
           tabIndex={show ? 0 : -1}
           aria-label="Call us"
-          className="flex min-h-12 w-12 items-center justify-center rounded-xl bg-teal text-white"
+          className="flex min-h-12 w-12 items-center justify-center border-2 border-navy bg-navy text-white"
         >
           <Phone />
         </a>

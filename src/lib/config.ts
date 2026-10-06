@@ -5,8 +5,11 @@
 
 export type Review = {
   name: string;
-  area: string;
   text: string;
+  /** Reply from the business, shown under the review. */
+  reply?: string;
+  /** e.g. "Local Guide · 235 reviews" */
+  badge?: string;
 };
 
 export const site = {
@@ -42,8 +45,48 @@ export const flags = {
   gasSafeNumber: "SC894828",
 } as const;
 
-/** Paste real Google reviews here (verbatim, with permission). Empty = fallback card. */
-export const reviews: Review[] = [];
+/** Verbatim Google reviews (owner-approved). Order = priority; the page shows the first 6. */
+export const reviews: Review[] = [
+  {
+    name: "Mike Reese",
+    badge: "Local Guide · 235 reviews",
+    text: "Excellent service from McInally Plumbing and Heating! They responded quickly, arrived on time, and completed the job to a very high standard. The plumber was friendly, professional, and explained everything clearly. The work was neat, the pricing was fair, and everything was left clean and tidy. I would highly recommend McInally Plumbing and Heating to anyone in Edinburgh looking for a reliable and trustworthy plumber. I'll definitely use them again in the future!",
+  },
+  {
+    name: "Ellie Brown",
+    text: "Had a leak in the bathroom, got in touch with Ryan through the contact form on his website. He called me less than 2 hours later, and came and fixed it that day. Came when he said he would, did a great job, and the price was reasonable. Can’t really ask for more! Would recommend.",
+  },
+  {
+    name: "Adam Archer",
+    text: "Ryan came round the same day we contacted him and had our leak sorted within 30 minutes. Great service for a great price. Will definitely use again for future plumbing needs.",
+  },
+  {
+    name: "Stacey Laing",
+    text: "Couldn’t be happier with my experience! Quick hassle free & really lovely lads who went over and above to help. Was getting my kitchen fitted and needed a plumber to fit new sink asap. Once in my home turned out the lad that came to my job with plumber was gas engineer who was able to do my cooker at the same time. They then organised an electrician for the following day to do my cooker and lights. Ryan is so professional and easy to work with, nothing is a problem, exactly what you want and need when having work done in your home. Blown away with the service thank you again guys.",
+    reply: "Thank you Stacey, I hope you’re enjoying the new kitchen",
+  },
+  {
+    name: "Kerry",
+    text: "I can highly recommend Ryan and his team of plumbers. We had a long running, complex problem in our flats which it seemed other professionals were unable to get to the bottom of, the problem was identified and resolved in a morning once they were brought on to the job. Professional, skilled, effective and helpful.",
+    reply: "Thanks Kerry, really appreciate you taking the time to leave this review. It was great to finally get to the bottom of the ongoing issue and have the problem identified and resolved for you. Thanks for trusting Ryan and the team with the job, and we’re glad we could help!",
+  },
+  {
+    name: "Colin Nesbit",
+    text: "I am extremely impressed by Ryan’s Plumbing Services. Prompt, efficient, pleasant, clean & tidy workers, great value and super straightforward to deal with. Ryan was able to help me out with an emergency leak as a new customer at very short notice. I cannot fault his service or company in any way whatsoever and I would highly recommend him to anyone reading this. Superb!",
+  },
+  {
+    name: "X. G.",
+    text: "Ryan came today with one of his colleagues and did various plumbing jobs for us (tap and washing machine installation, leak investigation). They arrived promptly and did the job really fast and efficiently. They were polite and professionals. I would highly recommend! Very reasonable prices too.",
+  },
+  {
+    name: "Ross Moncur",
+    text: "Completed a bathroom install and kitchen tap and sink with complete professionalism and quality of work. Lovely guy willing to do whatever you need..also, came on a minute's notice and stayed late to complete the job. I would highly recommend him for your household plumbing needs.",
+  },
+  {
+    name: "Hans Baird",
+    text: "Ryan has been exceptional. He arrived very promptly and was able to quickly identify the problem and fix it. When the insurer sent over a lost adjuster, they even commented on the quality of his work. …",
+  },
+];
 
 /** Drop a real photo into /public and set the path, e.g. "/ryan.jpg". */
 export const engineerPhoto: string | null = null;

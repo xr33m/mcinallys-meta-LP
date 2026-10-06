@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { offer, site } from "@/lib/config";
@@ -69,41 +70,36 @@ export function BookingForm() {
   }
 
   const field =
-    "mt-1.5 block min-h-12 w-full rounded-xl border-2 border-slate-200 bg-white px-4 text-base outline-none focus:border-teal";
+    "mt-1.5 block min-h-12 w-full border-2 border-navy bg-white px-3 text-base outline-none focus:bg-brand/10 focus:ring-2 focus:ring-brand";
   const err = (k: keyof Errors) =>
-    errors[k] ? <p className="mt-1 text-sm font-medium text-red-600">{errors[k]}</p> : null;
+    errors[k] ? <p className="mt-1 text-sm font-semibold text-red-700">{errors[k]}</p> : null;
+  const label = "block font-display text-base font-bold uppercase tracking-wider";
 
   return (
-    <section id="book" className="bg-navy px-4 py-12 sm:py-16">
+    <div id="book" className="scroll-mt-4">
       {SITE_KEY && (
         <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
       )}
-      <div className="mx-auto max-w-xl">
-        <h2 className="text-center text-2xl font-extrabold text-white sm:text-3xl">
-          Book your £{offer.price} Autumn Boiler Service
-        </h2>
-        <p className="mt-2 text-center text-slate-300">
-          Takes 30 seconds. We&rsquo;ll call you {offer.callbackWindow} to agree a day that suits.
-        </p>
+      <div className="border-2 border-navy bg-white text-navy shadow-hard-y">
+        <div className="border-b-2 border-navy bg-brand px-5 py-3">
+          <h2 className="h-display text-3xl">Book your £{offer.price} service</h2>
+          <p className="mt-1 text-sm font-semibold">Takes 30 seconds. We call you {offer.callbackWindow}.</p>
+        </div>
 
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          className="mt-6 rounded-2xl bg-white p-5 text-navy shadow-xl sm:p-7"
-        >
+        <form onSubmit={onSubmit} noValidate className="p-5">
           {assessment && (
-            <p className="mb-4 rounded-lg bg-teal-tint px-3 py-2 text-sm text-teal-dark">
-              ✓ Your winter-check answers will be sent with this request.
+            <p className="mb-4 border-l-4 border-teal bg-teal-tint px-3 py-2 text-sm font-medium text-teal-dark">
+              Your winter-check answers will be sent with this request.
             </p>
           )}
 
-          <label className="block text-sm font-bold">
+          <label className={label}>
             Your name
-            <input name="name" autoComplete="name" required className={field} placeholder="e.g. Sarah Campbell" />
+            <input name="name" autoComplete="name" required className={`${field} font-sans normal-case tracking-normal`} placeholder="e.g. Sarah Campbell" />
             {err("name")}
           </label>
 
-          <label className="mt-4 block text-sm font-bold">
+          <label className={`${label} mt-4`}>
             Mobile number
             <input
               name="phone"
@@ -111,27 +107,27 @@ export function BookingForm() {
               inputMode="tel"
               autoComplete="tel"
               required
-              className={field}
+              className={`${field} font-sans normal-case tracking-normal`}
               placeholder="07xxx xxxxxx"
             />
             {err("phone")}
           </label>
 
-          <label className="mt-4 block text-sm font-bold">
+          <label className={`${label} mt-4`}>
             Postcode
             <input
               name="postcode"
               autoComplete="postal-code"
               autoCapitalize="characters"
               required
-              className={field}
+              className={`${field} font-sans normal-case tracking-normal`}
               placeholder="e.g. EH10 4AB"
             />
             {err("postcode")}
           </label>
 
           <fieldset className="mt-4">
-            <legend className="text-sm font-bold">Best time for the visit</legend>
+            <legend className={label}>Best time for the visit</legend>
             <div className="mt-1.5 grid grid-cols-2 gap-2">
               {SLOTS.map((s) => (
                 <button
@@ -139,8 +135,8 @@ export function BookingForm() {
                   key={s}
                   aria-pressed={slot === s}
                   onClick={() => setSlot(s)}
-                  className={`min-h-12 rounded-xl border-2 px-2 text-sm font-semibold transition ${
-                    slot === s ? "border-teal bg-teal text-white" : "border-slate-200 hover:border-teal"
+                  className={`min-h-12 border-2 border-navy px-2 text-sm font-bold transition ${
+                    slot === s ? "bg-navy text-white" : "bg-white hover:bg-brand/20"
                   }`}
                 >
                   {s}
@@ -160,39 +156,35 @@ export function BookingForm() {
           {SITE_KEY && <div className="cf-turnstile mt-4" data-sitekey={SITE_KEY} data-theme="light" />}
 
           {errors.form && (
-            <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+            <p role="alert" className="mt-4 border-l-4 border-red-600 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">
               {errors.form}
             </p>
           )}
 
-          <button
-            type="submit"
-            disabled={busy}
-            className="mt-5 min-h-14 w-full rounded-xl bg-brand px-6 text-lg font-extrabold text-navy transition hover:bg-brand-dark disabled:opacity-60"
-          >
+          <button type="submit" disabled={busy} className="btn-yellow mt-5 w-full disabled:opacity-60">
             {busy ? "Sending…" : `Book my £${offer.price} service`}
           </button>
-          <p className="mt-3 text-center text-xs text-slate-500">
+          <p className="mt-3 text-center text-xs text-navy/60">
             No payment now. No obligation. We only use your details to arrange your service, see our{" "}
-            <a href="/privacy" className="underline">privacy policy</a>.
+            <Link href="/privacy" className="underline">privacy policy</Link>.
           </p>
         </form>
-
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={site.phoneHref}
-            className="flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl border-2 border-white/30 font-bold text-white hover:bg-white/10"
-          >
-            <Phone /> Call {site.phoneDisplay}
-          </a>
-          <a
-            href={site.whatsappHref}
-            className="flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl border-2 border-white/30 font-bold text-white hover:bg-white/10"
-          >
-            <WhatsApp /> WhatsApp us
-          </a>
-        </div>
       </div>
-    </section>
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <a
+          href={site.phoneHref}
+          className="flex min-h-12 items-center justify-center gap-2 border-2 border-white/60 font-display text-lg font-bold uppercase tracking-wide text-white hover:bg-white/10"
+        >
+          <Phone className="h-5 w-5" /> Call us
+        </a>
+        <a
+          href={site.whatsappHref}
+          className="flex min-h-12 items-center justify-center gap-2 border-2 border-white/60 font-display text-lg font-bold uppercase tracking-wide text-white hover:bg-white/10"
+        >
+          <WhatsApp className="h-5 w-5" /> WhatsApp
+        </a>
+      </div>
+    </div>
   );
 }

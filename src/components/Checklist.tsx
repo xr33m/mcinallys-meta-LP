@@ -1,41 +1,42 @@
 import { checklist, flags, offer } from "@/lib/config";
-import { Check } from "./icons";
 
 export function Checklist() {
   return (
-    <section className="px-4 py-12 sm:py-16">
-      <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-2xl font-extrabold sm:text-3xl">
-          What your £{offer.price} service includes
-        </h2>
-        <p className="mx-auto mt-2 max-w-xl text-center text-slate-600">
-          {flags.showGasSafe ? "A 12-point Gas Safe check" : "A 12-point check"}, so you know exactly what you&rsquo;re paying for.
-        </p>
+    <section className="px-4 py-14 sm:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p className="kicker">What you get</p>
+            <h2 className="h-display mt-2 text-5xl sm:text-6xl">
+              12 checks. One fixed price: £{offer.price}.
+            </h2>
+            <p className="mt-4 max-w-md text-navy/70">
+              {flags.showGasSafe
+                ? `Carried out by a Gas Safe registered engineer (${flags.gasSafeNumber}). `
+                : ""}
+              You see exactly what you&rsquo;re paying for, and you get a written record of what was checked.
+            </p>
+            <div className="mt-6 border-2 border-navy bg-brand p-4 shadow-hard">
+              <p className="font-display text-xl font-extrabold uppercase">If we find a problem</p>
+              <p className="mt-1 text-sm font-medium">
+                We explain it plainly and give you a fair quote. You decide. No pressure, no obligation.
+              </p>
+            </div>
+          </div>
 
-        <ol className="mt-8 grid gap-3 sm:grid-cols-2">
-          {checklist.map((c, i) => (
-            <li key={c.title} className="flex gap-3 rounded-xl border border-slate-200 p-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal text-white">
-                <Check className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="font-bold">
-                  <span className="mr-1.5 text-teal">{i + 1}.</span>
-                  {c.title}
-                </p>
-                <p className="mt-0.5 text-sm text-slate-600">{c.detail}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-8 text-center">
-          <a
-            href="#book"
-            className="inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-brand px-8 text-lg font-extrabold text-navy hover:bg-brand-dark sm:w-auto"
-          >
-            Book my £{offer.price} service
-          </a>
+          <ol className="divide-y-2 divide-line border-y-2 border-navy">
+            {checklist.map((c, i) => (
+              <li key={c.title} className="flex gap-4 py-3.5">
+                <span className="w-10 shrink-0 font-display text-4xl font-extrabold leading-none text-teal">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="font-display text-xl font-bold uppercase leading-tight tracking-wide">{c.title}</p>
+                  <p className="mt-0.5 text-sm text-navy/70">{c.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>

@@ -1,93 +1,80 @@
 import { flags, offer, site } from "@/lib/config";
-import { Check, Clock, Home, Shield, Star } from "./icons";
+import { BookingForm } from "./BookingForm";
+import { Check, Star } from "./icons";
 
 export function Hero() {
+  const saving = offer.wasPrice - offer.price;
   return (
-    <>
-      <section className="bg-gradient-to-b from-navy via-navy to-teal-dark px-4 pb-10 pt-8 text-white sm:pb-14 sm:pt-12">
-        <div className="mx-auto max-w-5xl">
-          <p className="inline-block rounded border border-teal-bright/60 bg-teal-bright/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-widest text-teal-bright">
-            Edinburgh&rsquo;s trusted local plumber
+    <section className="stripes bg-navy text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-12 pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14 lg:pb-16 lg:pt-14">
+        <div>
+          <p className="font-display text-base font-bold uppercase tracking-[0.12em] text-brand sm:text-lg sm:tracking-[0.18em]">
+            Edinburgh homeowners
+            {flags.showGasSafe && <span className="text-white/60"> · Gas Safe registered</span>}
           </p>
-          <h1 className="mt-4 max-w-2xl text-[2rem] font-extrabold leading-tight sm:text-5xl">
-            Edinburgh Boiler Service,{" "}
-            <span className="text-teal-bright">£{offer.price} this autumn</span>
+          <h1 className="h-display mt-3 text-[3.2rem] sm:text-7xl lg:text-8xl">
+            Boiler service.
+            <br />
+            <span className="text-brand">£{offer.price}</span> till {offer.endsLabel}.
           </h1>
-          <p className="mt-3 max-w-xl text-base text-slate-200 sm:text-lg">
-            A proper boiler service from a family-run Edinburgh firm. Book before{" "}
-            {offer.endsLabel} and save £{offer.wasPrice - offer.price}.
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
+            A proper annual service from a family-run Edinburgh firm, done before the cold weather
+            arrives. Fixed price. If we find anything, you get an honest quote, not a hard sell.
           </p>
 
-          <div className="mt-5 flex items-center gap-4">
-            <div className="flex items-baseline gap-2 rounded-xl bg-white px-4 py-2 text-navy">
-              <span className="text-4xl font-black">£{offer.price}</span>
-              <span className="text-lg font-semibold text-slate-400 line-through">£{offer.wasPrice}</span>
+          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-6">
+            <div className="inline-flex items-stretch border-2 border-dashed border-brand bg-brand/10">
+              <div className="flex items-baseline gap-2 px-4 py-2">
+                <span className="font-display text-6xl font-extrabold leading-none text-brand">
+                  £{offer.price}
+                </span>
+                <span className="font-display text-2xl font-semibold text-white/50 line-through">
+                  £{offer.wasPrice}
+                </span>
+              </div>
+              <div className="flex flex-col justify-center border-l-2 border-dashed border-brand px-3 font-display text-sm font-bold uppercase leading-tight tracking-wider">
+                Save £{saving}
+                <span className="font-semibold text-white/60">Ends {offer.endsLabel}</span>
+              </div>
             </div>
-            <p className="text-sm font-semibold text-brand">
-              Save £{offer.wasPrice - offer.price}
-              <br />
-              <span className="font-normal text-slate-300">until {offer.endsLabel}</span>
-            </p>
-          </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
-              id="hero-cta"
-              href="#book"
-              className="flex min-h-14 items-center justify-center rounded-xl bg-brand px-8 text-lg font-extrabold text-navy shadow-lg hover:bg-brand-dark"
+              href={site.googleReviewsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm"
             >
-              Book my £{offer.price} service
-            </a>
-            <a
-              href="#check"
-              className="flex min-h-14 items-center justify-center rounded-xl border-2 border-white/60 px-6 text-base font-bold hover:bg-white/10"
-            >
-              Take the 30-second winter check
+              <span className="flex text-brand">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-5 w-5" />
+                ))}
+              </span>
+              <span>
+                <b className="text-base">{site.googleRating}</b> · {site.googleReviewCount} Google reviews
+              </span>
             </a>
           </div>
 
-          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-slate-200">
-            {["No obligation", "Fully insured", "12-month workmanship guarantee"].map((t) => (
-              <li key={t} className="flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-teal-bright" /> {t}
+          <a id="hero-cta" href="#book" className="btn-yellow mt-6 w-full lg:hidden">
+            Book my £{offer.price} service
+          </a>
+
+          <ul className="mt-6 space-y-2 text-base">
+            {[
+              "Fully insured, with a 12-month workmanship guarantee",
+              "No payment now and no obligation",
+              `We call you ${offer.callbackWindow}`,
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-2.5">
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" /> {t}
               </li>
             ))}
           </ul>
-        </div>
-      </section>
 
-      <section className="bg-teal-dark px-4 py-4 text-white">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
-          <a
-            href={site.googleReviewsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            <span className="flex text-brand">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} />
-              ))}
-            </span>
-            <span className="font-bold">{site.googleRating}</span>
-            <span className="text-teal-tint">· {site.googleReviewCount} Google reviews</span>
-          </a>
-          {flags.showGasSafe && (
-            <span className="flex items-center gap-1.5 font-semibold">
-              <Shield /> Gas Safe registered{flags.gasSafeNumber && ` (${flags.gasSafeNumber})`}
-            </span>
-          )}
-          <span className="flex items-center gap-1.5 font-semibold">
-            <Shield /> Checkatrade approved
-          </span>
-          <span className="flex items-center gap-1.5 font-semibold">
-            <Clock /> 5+ years experience
-          </span>
-          <span className="flex items-center gap-1.5 font-semibold">
-            <Home /> Family run
-          </span>
         </div>
-      </section>
-    </>
+
+        <BookingForm />
+      </div>
+    </section>
   );
 }

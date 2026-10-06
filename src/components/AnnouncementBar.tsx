@@ -14,13 +14,11 @@ export function AnnouncementBar() {
   if (daysLeft === 0) return null;
 
   return (
-    <div className="bg-brand px-4 py-2 text-center text-sm font-semibold text-navy">
-      🍂 Edinburgh Autumn Offer: £{offer.price} Boiler Service (normally £
-      {offer.wasPrice}) · Ends {offer.endsLabel}
+    <div className="bg-brand px-4 py-2 text-center font-display text-base font-bold uppercase tracking-wide text-navy">
+      Edinburgh autumn offer: boiler service £{offer.price}, normally £{offer.wasPrice}. Ends{" "}
+      {offer.endsLabel}
       {daysLeft !== null && daysLeft <= 14 && (
-        <span className="ml-1 hidden sm:inline">
-          ({daysLeft} {daysLeft === 1 ? "day" : "days"} left)
-        </span>
+        <span className="hidden sm:inline"> · {daysLeft} {daysLeft === 1 ? "day" : "days"} left</span>
       )}
     </div>
   );

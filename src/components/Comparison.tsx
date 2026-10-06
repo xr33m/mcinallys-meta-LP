@@ -1,52 +1,38 @@
 import { offer } from "@/lib/config";
 import { Check, X } from "./icons";
 
-const planned = [
-  "You choose a day that suits you",
-  "Small faults caught early",
-  "Fixed £" + offer.price + " price, no surprises",
-  "Honest quote if anything needs fixing",
-];
-const breakdown = [
-  "Boilers tend to fail when demand is highest: the first cold snap",
-  "No heating or hot water until it's fixed",
-  "Waiting for an available engineer",
-  "Faults that could have been spotted cheaply months earlier",
+const rows: [string, string][] = [
+  ["You pick a day that suits you", "It fails on the coldest day, when everyone else's does too"],
+  ["Small faults caught early, while they're cheap", "Small faults grow into big ones"],
+  [`Fixed £${offer.price}, no surprises`, "An urgent callout, priced by the hour"],
+  ["Honest quote if anything needs doing", "No heating or hot water while you wait for a slot"],
 ];
 
 export function Comparison() {
   return (
-    <section className="bg-slate-50 px-4 py-12 sm:py-16">
-      <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-2xl font-extrabold sm:text-3xl">
-          Plan it now, or deal with it in January
-        </h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border-2 border-teal bg-white p-5">
-            <p className="text-sm font-bold uppercase tracking-wider text-teal">Planned autumn service</p>
-            <p className="mt-1 text-3xl font-black">£{offer.price}</p>
-            <ul className="mt-4 space-y-2.5">
-              {planned.map((t) => (
-                <li key={t} className="flex gap-2.5 text-sm">
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-teal" /> {t}
-                </li>
-              ))}
-            </ul>
+    <section className="bg-navy px-4 py-14 text-white sm:py-20">
+      <div className="mx-auto max-w-5xl">
+        <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-brand">Why now</p>
+        <h2 className="h-display mt-2 text-5xl sm:text-6xl">Service it in October. Not in January.</h2>
+
+        <div className="mt-8 border-2 border-white/80">
+          <div className="grid grid-cols-2 border-b-2 border-white/80 font-display text-lg font-extrabold uppercase tracking-wide sm:text-2xl">
+            <div className="bg-brand px-4 py-3 text-navy">Service now · £{offer.price}</div>
+            <div className="px-4 py-3 text-white/70">Wait for it to break</div>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5">
-            <p className="text-sm font-bold uppercase tracking-wider text-slate-500">Waiting until it breaks</p>
-            <p className="mt-1 text-3xl font-black text-slate-400">Unplanned</p>
-            <ul className="mt-4 space-y-2.5">
-              {breakdown.map((t) => (
-                <li key={t} className="flex gap-2.5 text-sm text-slate-600">
-                  <X className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" /> {t}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {rows.map(([a, b], i) => (
+            <div key={a} className={`grid grid-cols-2 ${i > 0 ? "border-t border-white/25" : ""}`}>
+              <p className="flex gap-2.5 bg-white px-4 py-4 text-sm font-semibold text-navy sm:text-base">
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-teal" /> {a}
+              </p>
+              <p className="flex gap-2.5 px-4 py-4 text-sm text-white/70 sm:text-base">
+                <X className="mt-0.5 h-5 w-5 shrink-0 text-white/40" /> {b}
+              </p>
+            </div>
+          ))}
         </div>
-        <p className="mt-4 text-center text-xs text-slate-500">
-          A service can&rsquo;t guarantee your boiler will never break down, but it&rsquo;s the best way to catch problems early.
+        <p className="mt-4 text-xs text-white/50">
+          A service can&rsquo;t guarantee a boiler will never break down, but it&rsquo;s the best way to catch problems early.
         </p>
       </div>
     </section>

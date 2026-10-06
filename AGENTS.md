@@ -1,9 +1,9 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Project notes for coding agents
 
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- Stack: Next.js 15.5 (App Router) + React 19 + Tailwind CSS **3.4**. This is deliberate: the project must preview in
+  bolt.new / StackBlitz (WebContainers), which cannot load native binaries. Do **not** upgrade to Next 16 or Tailwind 4
+  (native compiler, `oxide`, `lightningcss`) without confirming the Bolt preview still works.
+- Fonts come from npm (`@fontsource/*`), not `next/font/google`, so no network fetch is needed in the preview.
+- `next/image` is set to `unoptimized` because `sharp` is native.
+- All editable business content lives in `src/lib/config.ts`.
+- Do not add a `.env.example` file: Bolt deletes `.env*` files. Env vars are documented in README.md.

@@ -24,17 +24,17 @@ const RESULT = {
   Low: {
     title: "Looking healthy",
     body: "Your boiler shows few warning signs. A yearly service is the cheapest way to keep it that way.",
-    tone: "bg-emerald-50 border-emerald-300 text-emerald-900",
+    tone: "bg-white border-teal text-navy",
   },
   Medium: {
     title: "Worth servicing before winter",
     body: "A few factors suggest a service now would be sensible, while it's easy to book a slot and not a rush job.",
-    tone: "bg-amber-50 border-amber-300 text-amber-900",
+    tone: "bg-brand/30 border-navy text-navy",
   },
   High: {
     title: "Book your service soon",
     body: "Several factors point to a boiler that would benefit from a proper check. Booking before the cold weather arrives gives you the most choice of slots.",
-    tone: "bg-orange-50 border-orange-300 text-orange-900",
+    tone: "bg-brand border-navy text-navy",
   },
 } as const;
 
@@ -64,32 +64,31 @@ export function WinterCheck() {
   }
 
   const optionBtn =
-    "flex min-h-14 w-full items-center rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-left text-base font-medium transition active:scale-[0.99] hover:border-teal";
+    "flex min-h-14 w-full items-center border-2 border-navy bg-white px-4 py-3 text-left text-base font-semibold transition hover:bg-brand/20 active:translate-x-[2px] active:translate-y-[2px]";
 
   return (
-    <section id="check" className="bg-teal-tint px-4 py-12 sm:py-16">
-      <div className="mx-auto max-w-xl">
-        <p className="text-center text-sm font-bold uppercase tracking-wider text-teal">
-          Free · 30 seconds
-        </p>
-        <h2 className="mt-2 text-center text-2xl font-extrabold sm:text-3xl">
-          Is your boiler ready for winter?
-        </h2>
+    <section id="check" className="bg-teal-tint px-4 py-14 sm:py-20">
+      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div>
+          <p className="kicker">Free · 30 seconds</p>
+          <h2 className="h-display mt-2 text-5xl sm:text-6xl">Is your boiler ready for winter?</h2>
+          <p className="mt-4 max-w-md text-navy/70">
+            Three taps, no sign-up. You get a simple winter-readiness result, and Ryan sees your answers if you book.
+          </p>
+        </div>
 
-        <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 sm:p-7">
+        <div className="border-2 border-navy bg-white p-5 shadow-hard sm:p-7">
           {!started && !assessment && (
-            <div className="text-center">
-              <p className="text-slate-600">
-                Answer 3 quick taps and get a simple winter-readiness score for your boiler. No sign-up needed.
-              </p>
+            <div>
+              <p className="text-navy/70">Not sure whether yours needs a service? Find out in 30 seconds.</p>
               <button
                 onClick={() => setStarted(true)}
-                className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-teal px-6 text-base font-bold text-white hover:bg-teal-dark sm:w-auto"
+                className="btn mt-5 w-full bg-navy text-white hover:bg-navy-deep sm:w-auto"
               >
                 Start the 30-second check
               </button>
-              <p className="mt-4 text-sm">
-                <a href="#book" className="font-semibold text-teal underline underline-offset-2">
+              <p className="mt-4 text-sm font-medium">
+                <a href="#book" className="font-bold text-teal-dark underline underline-offset-2">
                   Skip it and book the £80 service
                 </a>
               </p>
@@ -99,18 +98,18 @@ export function WinterCheck() {
           {started && !assessment && (
             <div>
               <div className="mb-4 flex items-center gap-3">
-                <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
+                <div className="h-2.5 flex-1 border-2 border-navy bg-white">
                   <div
-                    className="h-full rounded-full bg-teal transition-all"
+                    className="h-full bg-brand transition-all"
                     style={{ width: `${((step + 1) / 3) * 100}%` }}
                   />
                 </div>
-                <span className="text-sm font-semibold text-slate-500">{step + 1} of 3</span>
+                <span className="font-display text-lg font-bold uppercase tracking-wide">{step + 1} / 3</span>
               </div>
 
               {step === 0 && (
                 <fieldset>
-                  <legend className="mb-3 text-lg font-bold">How old is your boiler?</legend>
+                  <legend className="mb-3 font-display text-2xl font-bold uppercase tracking-wide">How old is your boiler?</legend>
                   <div className="grid gap-2.5">
                     {AGE.map((o, i) => (
                       <button
@@ -131,7 +130,7 @@ export function WinterCheck() {
 
               {step === 1 && (
                 <fieldset>
-                  <legend className="mb-3 text-lg font-bold">When was it last serviced?</legend>
+                  <legend className="mb-3 font-display text-2xl font-bold uppercase tracking-wide">When was it last serviced?</legend>
                   <div className="grid gap-2.5">
                     {SERVICE.map((o, i) => (
                       <button
@@ -152,8 +151,8 @@ export function WinterCheck() {
 
               {step === 2 && (
                 <fieldset>
-                  <legend className="mb-1 text-lg font-bold">Noticed anything lately?</legend>
-                  <p className="mb-3 text-sm text-slate-500">Tick any that apply, or none.</p>
+                  <legend className="mb-1 font-display text-2xl font-bold uppercase tracking-wide">Noticed anything lately?</legend>
+                  <p className="mb-3 text-sm text-navy/60">Tick any that apply, or none.</p>
                   <div className="grid gap-2.5">
                     {SYMPTOMS.map((o) => {
                       const on = symptoms.includes(o);
@@ -161,13 +160,13 @@ export function WinterCheck() {
                         <button
                           key={o}
                           aria-pressed={on}
-                          className={`${optionBtn} gap-3 ${on ? "border-teal bg-teal-tint" : ""}`}
+                          className={`${optionBtn} gap-3 ${on ? "bg-brand/30" : ""}`}
                           onClick={() =>
                             setSymptoms((s) => (on ? s.filter((x) => x !== o) : [...s, o]))
                           }
                         >
                           <span
-                            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 ${on ? "border-teal bg-teal text-white" : "border-slate-300"}`}
+                            className={`flex h-6 w-6 shrink-0 items-center justify-center border-2 border-navy ${on ? "bg-navy text-white" : "bg-white"}`}
                           >
                             {on && <Check className="h-4 w-4" />}
                           </span>
@@ -178,7 +177,7 @@ export function WinterCheck() {
                   </div>
                   <button
                     onClick={() => finish(symptoms)}
-                    className="mt-4 min-h-12 w-full rounded-xl bg-teal px-6 text-base font-bold text-white hover:bg-teal-dark"
+                    className="btn mt-4 w-full bg-navy text-white hover:bg-navy-deep"
                   >
                     {symptoms.length ? "See my result" : "Nothing, see my result"}
                   </button>
@@ -188,7 +187,7 @@ export function WinterCheck() {
               {step > 0 && (
                 <button
                   onClick={() => setStep(step - 1)}
-                  className="mt-4 text-sm font-semibold text-slate-500 underline underline-offset-2"
+                  className="mt-4 text-sm font-semibold text-navy/60 underline underline-offset-2"
                 >
                   Back
                 </button>
@@ -198,20 +197,20 @@ export function WinterCheck() {
 
           {assessment && (
             <div aria-live="polite">
-              <div className={`rounded-xl border-2 p-4 ${RESULT[assessment.level].tone}`}>
-                <p className="text-xs font-bold uppercase tracking-wider opacity-70">
+              <div className={`border-2 p-4 ${RESULT[assessment.level].tone}`}>
+                <p className="font-display text-sm font-bold uppercase tracking-[0.15em] opacity-70">
                   Your winter-readiness result
                 </p>
-                <p className="mt-1 text-xl font-extrabold">{RESULT[assessment.level].title}</p>
+                <p className="h-display mt-1 text-3xl">{RESULT[assessment.level].title}</p>
                 <p className="mt-1 text-sm">{RESULT[assessment.level].body}</p>
               </div>
               <a
                 href="#book"
-                className="mt-4 flex min-h-12 w-full items-center justify-center rounded-xl bg-brand px-6 text-base font-extrabold text-navy hover:bg-brand-dark"
+                className="btn-yellow mt-4 w-full"
               >
                 Book my £80 service →
               </a>
-              <p className="mt-3 text-center text-xs text-slate-500">
+              <p className="mt-3 text-center text-xs text-navy/60">
                 We&rsquo;ll attach your answers so Ryan knows what to look out for.{" "}
                 <button onClick={reset} className="font-semibold underline">
                   Retake
