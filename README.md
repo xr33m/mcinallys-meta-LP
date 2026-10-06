@@ -1,6 +1,6 @@
 # McInally's £80 Autumn Boiler Service: landing page
 
-Next.js 15 (App Router) + Tailwind v3, built for Meta Ads traffic and deployed on Vercel.
+Next.js 14 (App Router) + Tailwind v3, built for Meta Ads traffic and deployed on Vercel.
 
 ## Edit content
 Everything editable lives in `src/lib/config.ts` (prices, dates, phone, reviews, checklist, FAQs, photo).
@@ -12,7 +12,7 @@ Items marked `CONFIRM` need a real answer before launch.
 
 ## Preview (bolt.new / StackBlitz)
 Import the repo from GitHub; Bolt runs `npm install` then `npm run dev`. The stack is chosen to run in a browser-based Node
-(Next 15 + Tailwind 3, no native dependencies, fonts from npm). With no env vars set, form submissions are logged to the
+(Next 14.2 + React 18 + Tailwind 3, no native dependencies, fonts from npm). With no env vars set, form submissions are logged to the
 console and succeed, so the whole flow can be previewed without a CRM.
 
 ## Lead delivery
