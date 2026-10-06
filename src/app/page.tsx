@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Checklist } from "@/components/Checklist";
 import { Comparison } from "@/components/Comparison";
@@ -12,25 +13,44 @@ import { Ryan } from "@/components/Ryan";
 import { StickyBar } from "@/components/StickyBar";
 import { TrustBar } from "@/components/TrustBar";
 import { WinterCheck } from "@/components/WinterCheck";
+import { offer } from "@/lib/config";
+import { currentPrice, offerIsLive } from "@/lib/offer";
+
+// Re-render at most every 15 minutes so the page switches to the standard price once the offer ends.
+export const revalidate = 900;
+
+export function generateMetadata(): Metadata {
+  const live = offerIsLive();
+  return {
+    title: live
+      ? `£${offer.price} Boiler Service in Edinburgh | McInally's Plumbing & Heating`
+      : "Boiler Service in Edinburgh | McInally's Plumbing & Heating",
+    description: live
+      ? `Autumn boiler service for Edinburgh homeowners: £${offer.price} (normally £${offer.wasPrice}) until ${offer.endsLabel}. Gas Safe registered, family-run, 5.0★ on Google.`
+      : "Boiler service for Edinburgh homeowners. Gas Safe registered, family-run, 5.0★ on Google.",
+  };
+}
 
 export default function Home() {
+  const live = offerIsLive();
+  const price = currentPrice(live);
   return (
     <LeadProvider>
-      <AnnouncementBar />
+      <AnnouncementBar live={live} price={price} />
       <Header />
       <main>
-        <Hero />
+        <Hero live={live} />
         <TrustBar />
         <Reviews />
-        <Checklist />
-        <WinterCheck />
-        <Comparison />
+        <Checklist price={price} />
+        <WinterCheck price={price} />
+        <Comparison price={price} />
         <Ryan />
         <Faq />
-        <FinalCta />
+        <FinalCta live={live} />
       </main>
       <Footer />
-      <StickyBar />
+      <StickyBar price={price} />
     </LeadProvider>
   );
 }

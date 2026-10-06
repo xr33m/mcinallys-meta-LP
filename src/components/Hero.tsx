@@ -1,8 +1,10 @@
 import { flags, offer, site } from "@/lib/config";
+import { currentPrice } from "@/lib/offer";
 import { BookingForm } from "./BookingForm";
 import { Check, Star } from "./icons";
 
-export function Hero() {
+export function Hero({ live }: { live: boolean }) {
+  const price = currentPrice(live);
   const saving = offer.wasPrice - offer.price;
   return (
     <section className="stripes bg-navy text-white">
@@ -15,7 +17,15 @@ export function Hero() {
           <h1 className="h-display mt-3 text-[3.2rem] sm:text-7xl lg:text-8xl">
             Boiler service.
             <br />
-            <span className="text-brand">£{offer.price}</span> till {offer.endsLabel}.
+            {live ? (
+              <>
+                <span className="text-brand">£{offer.price}</span> till {offer.endsLabel}.
+              </>
+            ) : (
+              <>
+                Fixed price <span className="text-brand">£{price}</span>.
+              </>
+            )}
           </h1>
           <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
             A proper annual service from a family-run Edinburgh firm, done before the cold weather
@@ -25,16 +35,25 @@ export function Hero() {
           <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-6">
             <div className="inline-flex items-stretch border-2 border-dashed border-brand bg-brand/10">
               <div className="flex items-baseline gap-2 px-4 py-2">
-                <span className="font-display text-6xl font-extrabold leading-none text-brand">
-                  £{offer.price}
-                </span>
-                <span className="font-display text-2xl font-semibold text-white/50 line-through">
-                  £{offer.wasPrice}
-                </span>
+                <span className="font-display text-6xl font-extrabold leading-none text-brand">£{price}</span>
+                {live && (
+                  <span className="font-display text-2xl font-semibold text-white/60 line-through">
+                    £{offer.wasPrice}
+                  </span>
+                )}
               </div>
               <div className="flex flex-col justify-center border-l-2 border-dashed border-brand px-3 font-display text-sm font-bold uppercase leading-tight tracking-wider">
-                Save £{saving}
-                <span className="font-semibold text-white/60">Ends {offer.endsLabel}</span>
+                {live ? (
+                  <>
+                    Save £{saving}
+                    <span className="font-semibold text-white/70">Ends {offer.endsLabel}</span>
+                  </>
+                ) : (
+                  <>
+                    Fixed price
+                    <span className="font-semibold text-white/70">Full service</span>
+                  </>
+                )}
               </div>
             </div>
 
@@ -56,7 +75,7 @@ export function Hero() {
           </div>
 
           <a id="hero-cta" href="#book" className="btn-yellow mt-6 w-full lg:hidden">
-            Book my £{offer.price} service
+            Book my £{price} service
           </a>
 
           <ul className="mt-6 space-y-2 text-base">
@@ -73,7 +92,7 @@ export function Hero() {
 
         </div>
 
-        <BookingForm />
+        <BookingForm price={price} />
       </div>
     </section>
   );

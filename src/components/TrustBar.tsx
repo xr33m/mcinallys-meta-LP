@@ -4,7 +4,7 @@ export function TrustBar() {
   const items = [
     flags.showGasSafe && { big: "Gas Safe", small: `Reg. ${flags.gasSafeNumber}` },
     { big: "5.0 ★", small: `${site.googleReviewCount} Google reviews` },
-    { big: "Checkatrade", small: "Approved tradesperson" },
+    { big: "Checkatrade", small: "+ TrustATrader + Yell" },
     { big: "12 months", small: "Workmanship guarantee" },
     { big: "Fully insured", small: "Family run · 5+ years" },
   ].filter(Boolean) as { big: string; small: string }[];

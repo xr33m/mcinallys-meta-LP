@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { offer, site } from "@/lib/config";
+import { site } from "@/lib/config";
 import { Phone, WhatsApp } from "./icons";
 
 /** Mobile-only CTA: appears once the hero CTA scrolls away, hides while the form is in view. */
-export function StickyBar() {
+export function StickyBar({ price }: { price: number }) {
   const [heroGone, setHeroGone] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
 
@@ -40,7 +40,7 @@ export function StickyBar() {
           tabIndex={show ? 0 : -1}
           className="flex min-h-12 flex-1 items-center justify-center border-2 border-navy bg-brand font-display text-xl font-extrabold uppercase tracking-wide text-navy"
         >
-          Book £{offer.price} service
+          Book £{price} service
         </a>
         <a
           href={site.whatsappHref}

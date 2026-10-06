@@ -4,6 +4,16 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 64px; /* clears the sticky top bar */
+}
+
+/* Visible keyboard focus on any background (yellow ring + navy outline) */
+@layer base {
+  :focus-visible {
+    outline: 3px solid #ffc107;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px #1a2332;
+  }
 }
 
 body {
@@ -17,7 +27,7 @@ body {
     @apply font-display font-extrabold uppercase leading-[0.95] tracking-tight;
   }
   .kicker {
-    @apply font-display text-sm font-bold uppercase tracking-[0.18em] text-teal;
+    @apply font-display text-sm font-bold uppercase tracking-[0.18em] text-teal-dark;
   }
   .btn {
     @apply inline-flex min-h-14 items-center justify-center gap-2 border-2 border-navy px-6 font-display text-xl font-extrabold uppercase tracking-wide transition active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;

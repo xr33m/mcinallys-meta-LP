@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { engineerPhoto, site } from "@/lib/config";
+import { areas, engineerPhoto, site } from "@/lib/config";
 
 export function Ryan() {
   return (
@@ -35,6 +35,12 @@ export function Ryan() {
           <p className="mt-3 max-w-xl text-navy/70">
             We cover {site.coverage}. Gas work is carried out by Gas Safe registered engineers.
           </p>
+          <p className="mt-5 font-display text-sm font-bold uppercase tracking-[0.15em] text-navy/70">Areas we cover include</p>
+          <ul className="mt-2 flex max-w-xl flex-wrap gap-2">
+            {areas.map((a) => (
+              <li key={a} className="border-2 border-navy bg-white px-2.5 py-0.5 text-sm font-semibold">{a}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

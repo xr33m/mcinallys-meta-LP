@@ -1,4 +1,4 @@
-import { reviews, site } from "@/lib/config";
+import { directories, reviews, site } from "@/lib/config";
 import { Star } from "./icons";
 
 const SHOWN = 5;
@@ -32,11 +32,18 @@ export function Reviews() {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           <figure className="border-2 border-navy bg-navy p-6 text-white shadow-hard lg:col-span-1 lg:self-start">
-            <span className="flex text-brand">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-5 w-5" />
-              ))}
-            </span>
+            <div className="flex items-center justify-between gap-3">
+              <span className="flex text-brand">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-5 w-5" />
+                ))}
+              </span>
+              {lead.tag && (
+                <span className="bg-brand px-2 py-0.5 font-display text-sm font-bold uppercase tracking-wider text-navy">
+                  {lead.tag}
+                </span>
+              )}
+            </div>
             <blockquote className="mt-4 text-[1.05rem] leading-relaxed">{lead.text}</blockquote>
             <figcaption className="mt-5 border-t border-white/20 pt-3">
               <p className="font-display text-xl font-bold uppercase tracking-wide">{lead.name}</p>
@@ -44,11 +51,11 @@ export function Reviews() {
             </figcaption>
           </figure>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2">
+          <div className="gap-5 sm:columns-2 lg:col-span-2 [&>figure]:mb-5 [&>figure]:break-inside-avoid">
             {list.map((r) => (
-              <figure key={r.name} className="flex flex-col border-2 border-navy bg-white p-5">
+              <figure key={r.name} className="border-2 border-navy bg-white p-5">
                 <Stars />
-                <blockquote className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-navy/90">
+                <blockquote className="mt-3 text-[0.95rem] leading-relaxed text-navy/90">
                   {r.text.length > 400 ? r.text.slice(0, 400).replace(/\s+\S*$/, "") + "…" : r.text}
                 </blockquote>
                 <figcaption className="mt-4 font-display text-lg font-bold uppercase tracking-wide">
@@ -65,7 +72,7 @@ export function Reviews() {
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center">
           <a
             href={site.googleReviewsUrl}
             target="_blank"
@@ -74,6 +81,25 @@ export function Reviews() {
           >
             Read all {site.googleReviewCount} reviews on Google
           </a>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-display text-sm font-bold uppercase tracking-[0.15em] text-navy/70">Also find us on</span>
+            {directories.map((d) => {
+              const label = d.logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={d.logo} alt={d.name} className="h-5 w-auto" />
+              ) : (
+                d.name
+              );
+              const cls = "border-2 border-navy bg-white px-3 py-1 font-display text-lg font-bold uppercase tracking-wide";
+              return d.url ? (
+                <a key={d.name} href={d.url} target="_blank" rel="noopener noreferrer" className={`${cls} hover:bg-brand/30`}>
+                  {label}
+                </a>
+              ) : (
+                <span key={d.name} className={cls}>{label}</span>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

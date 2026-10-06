@@ -10,6 +10,8 @@ export type Review = {
   reply?: string;
   /** e.g. "Local Guide · 235 reviews" */
   badge?: string;
+  /** Short label shown on the card, e.g. "Boiler service". */
+  tag?: string;
 };
 
 export const site = {
@@ -18,9 +20,12 @@ export const site = {
   owner: "Ryan",
   phoneDisplay: "07449 984820",
   phoneHref: "tel:+447449984820",
+  whatsappPhotoHref:
+    "https://wa.me/447449984820?text=" +
+    encodeURIComponent("Hi, I've booked the boiler service. Here's a photo of my boiler:"),
   whatsappHref:
     "https://wa.me/447449984820?text=" +
-    encodeURIComponent("Hi, I'd like to book the £80 Autumn Boiler Service."),
+    encodeURIComponent("Hi, I'd like to book the boiler service."),
   email: "ryan@mcinallys.co.uk",
   googleReviewsUrl: "https://g.page/r/CdaGFUfY18-TEBM/review",
   checkatradeUrl:
@@ -39,6 +44,15 @@ export const offer = {
   callbackWindow: "within 2 hours (8am–6pm, Mon–Sat)",
 } as const;
 
+/**
+ * Capacity cue shown in the sticky top bar. It MUST be true and kept up to date: UK consumer law treats
+ * made-up scarcity as an unfair practice. Set to null to hide it. (Later we can drive this from Airtable bookings.)
+ */
+export const capacity = {
+  slotsLeft: 12 as number | null,
+  period: "this month",
+};
+
 export const flags = {
   // Gas Safe registration confirmed by the business owner.
   showGasSafe: true,
@@ -47,6 +61,11 @@ export const flags = {
 
 /** Verbatim Google reviews (owner-approved). Order = priority; the page shows the first 6. */
 export const reviews: Review[] = [
+  {
+    name: "Heather Gunn",
+    tag: "Boiler service",
+    text: "Once again McInally's came to our aid, this time for a long over due boiler service. Max and Robbie arrived and undertook the work swiftly and competently. They kept us informed of arrival time and were with us as promised. Ryan has a great team, he answers messages and calls and responds quickly. We cannot compliment him and his team highly enough on their work ethic, value and ability to make their customers happy. Thanks again for coming to our rescue.",
+  },
   {
     name: "Mike Reese",
     badge: "Local Guide · 235 reviews",
@@ -89,6 +108,27 @@ export const reviews: Review[] = [
 ];
 
 /** Drop a real photo into /public and set the path, e.g. "/ryan.jpg". */
+/** Directory listings. Add `logo: "/logos/yell.svg"` (file in /public) to show the official logo instead of text. */
+export const directories: { name: string; url?: string; logo?: string }[] = [
+  { name: "Checkatrade", url: site.checkatradeUrl },
+  { name: "TrustATrader" },
+  { name: "Yell" },
+];
+
+/** CONFIRM with Ryan: areas he's happy to name. */
+export const areas = [
+  "Leith", "Morningside", "Portobello", "Corstorphine", "Stockbridge", "Marchmont",
+  "Newington", "Gorgie", "Murrayfield", "Colinton", "Musselburgh", "Dalkeith",
+];
+
+/** CONFIRM with Ryan: only promises he will honour. Shown near the checklist. */
+export const promises = [
+  "Fixed price, parts or repairs quoted separately",
+  "No obligation on any repair quote",
+  "No payment taken online or upfront",
+  "12-month workmanship guarantee",
+];
+
 export const engineerPhoto: string | null = null;
 
 /** CONFIRM with Ryan: these are the typical points of a gas boiler service. */
@@ -113,7 +153,7 @@ export const faqs: { q: string; a: string }[] = [
     a: "We explain exactly what we found and give you a fair, no-pressure quote. You decide whether to go ahead. There's no obligation and no hard sell.",
   },
   {
-    q: "Which boilers does the £80 service cover?",
+    q: "Which boilers does the service cover?",
     a: "Gas boilers: combi, system and regular. Not sure what you have? Tell us the make and age when we call and we'll confirm.",
   },
   {

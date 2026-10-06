@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-export function BookingForm() {
+export function BookingForm({ price }: { price: number }) {
   const router = useRouter();
   const { assessment } = useLead();
   const attribution = useRef<Record<string, string>>({});
@@ -70,7 +70,7 @@ export function BookingForm() {
   }
 
   const field =
-    "mt-1.5 block min-h-12 w-full border-2 border-navy bg-white px-3 text-base outline-none focus:bg-brand/10 focus:ring-2 focus:ring-brand";
+    "mt-1.5 block min-h-12 w-full border-2 border-navy bg-white px-3 text-base outline-none focus:border-teal focus:ring-2 focus:ring-teal";
   const err = (k: keyof Errors) =>
     errors[k] ? <p className="mt-1 text-sm font-semibold text-red-700">{errors[k]}</p> : null;
   const label = "block font-display text-base font-bold uppercase tracking-wider";
@@ -82,7 +82,7 @@ export function BookingForm() {
       )}
       <div className="border-2 border-navy bg-white text-navy shadow-hard-y">
         <div className="border-b-2 border-navy bg-brand px-5 py-3">
-          <h2 className="h-display text-3xl">Book your £{offer.price} service</h2>
+          <h2 className="h-display text-3xl">Book your £{price} service</h2>
           <p className="mt-1 text-sm font-semibold">Takes 30 seconds. We call you {offer.callbackWindow}.</p>
         </div>
 
@@ -162,9 +162,9 @@ export function BookingForm() {
           )}
 
           <button type="submit" disabled={busy} className="btn-yellow mt-5 w-full disabled:opacity-60">
-            {busy ? "Sending…" : `Book my £${offer.price} service`}
+            {busy ? "Sending…" : `Book my £${price} service`}
           </button>
-          <p className="mt-3 text-center text-xs text-navy/60">
+          <p className="mt-3 text-center text-xs text-navy/70">
             No payment now. No obligation. We only use your details to arrange your service, see our{" "}
             <Link href="/privacy" className="underline">privacy policy</Link>.
           </p>

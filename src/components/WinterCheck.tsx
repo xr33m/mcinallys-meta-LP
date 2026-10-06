@@ -38,7 +38,7 @@ const RESULT = {
   },
 } as const;
 
-export function WinterCheck() {
+export function WinterCheck({ price }: { price: number }) {
   const { assessment, setAssessment } = useLead();
   const [step, setStep] = useState(0);
   const [started, setStarted] = useState(false);
@@ -89,7 +89,7 @@ export function WinterCheck() {
               </button>
               <p className="mt-4 text-sm font-medium">
                 <a href="#book" className="font-bold text-teal-dark underline underline-offset-2">
-                  Skip it and book the £80 service
+                  Skip it and book the £{price} service
                 </a>
               </p>
             </div>
@@ -152,7 +152,7 @@ export function WinterCheck() {
               {step === 2 && (
                 <fieldset>
                   <legend className="mb-1 font-display text-2xl font-bold uppercase tracking-wide">Noticed anything lately?</legend>
-                  <p className="mb-3 text-sm text-navy/60">Tick any that apply, or none.</p>
+                  <p className="mb-3 text-sm text-navy/70">Tick any that apply, or none.</p>
                   <div className="grid gap-2.5">
                     {SYMPTOMS.map((o) => {
                       const on = symptoms.includes(o);
@@ -187,7 +187,7 @@ export function WinterCheck() {
               {step > 0 && (
                 <button
                   onClick={() => setStep(step - 1)}
-                  className="mt-4 text-sm font-semibold text-navy/60 underline underline-offset-2"
+                  className="mt-4 text-sm font-semibold text-navy/70 underline underline-offset-2"
                 >
                   Back
                 </button>
@@ -208,9 +208,9 @@ export function WinterCheck() {
                 href="#book"
                 className="btn-yellow mt-4 w-full"
               >
-                Book my £80 service →
+                Book my £{price} service →
               </a>
-              <p className="mt-3 text-center text-xs text-navy/60">
+              <p className="mt-3 text-center text-xs text-navy/70">
                 We&rsquo;ll attach your answers so Ryan knows what to look out for.{" "}
                 <button onClick={reset} className="font-semibold underline">
                   Retake

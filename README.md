@@ -3,6 +3,7 @@
 Next.js 14 (App Router) + Tailwind v3, built for Meta Ads traffic and deployed on Vercel.
 
 ## Edit content
+(Sticky bar slot count = `capacity.slotsLeft`; it must be true and kept updated, set to `null` to hide it. After `offer.endsISO` passes, the page automatically switches to the standard price within ~15 minutes.)
 Everything editable lives in `src/lib/config.ts` (prices, dates, phone, reviews, checklist, FAQs, photo).
 Items marked `CONFIRM` need a real answer before launch.
 
