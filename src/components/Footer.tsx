@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl">
         <p className="font-display text-xl font-bold uppercase tracking-wide text-white">{site.brand}</p>
         <p className="mt-1">
-          {site.legalName}
+          {site.legalName} · Registered in Scotland no. {site.companyNumber}
           {flags.showGasSafe && ` · Gas Safe registered ${flags.gasSafeNumber}`}
         </p>
         <p className="mt-1">

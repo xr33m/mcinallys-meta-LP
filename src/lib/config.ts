@@ -17,6 +17,8 @@ export type Review = {
 export const site = {
   brand: "McInally's Plumbing & Heating",
   legalName: "McInally's Plumbing and Heating LTD",
+  // Companies House number (NOT the Gas Safe number)
+  companyNumber: "SC894828",
   owner: "Ryan",
   phoneDisplay: "07449 984820",
   phoneHref: "tel:+447449984820",
@@ -56,7 +58,7 @@ export const capacity = {
 export const flags = {
   // Gas Safe registration confirmed by the business owner.
   showGasSafe: true,
-  gasSafeNumber: "SC894828",
+  gasSafeNumber: "980504",
 } as const;
 
 /** Verbatim Google reviews (owner-approved). Order = priority; the page shows the first 6. */
