@@ -16,13 +16,19 @@ Import the repo from GitHub; Bolt runs `npm install` then `npm run dev`. The sta
 console and succeed, so the whole flow can be previewed without a CRM.
 
 ## Lead delivery
-`POST /api/lead` validates, checks the honeypot and Turnstile (if keys are set), then sends to every configured
-destination (Airtable and/or `LEAD_WEBHOOK_URL`). See `.env.example`. In production with no destination
-configured, the API returns an error rather than silently dropping a lead.
+`POST /api/lead` validates, checks the honeypot and Turnstile (if keys are set), then sends to every configured destination
+(a webhook and/or Airtable directly). In production with no destination configured, the API returns an error rather than
+silently dropping a lead.
+
+### Environment variables (set in Vercel)
+- `LEAD_WEBHOOK_URL`: the Make webhook for the scenario "7. McInally's Lead → Instant Alert". **This is the only variable needed to
+  go live.** Make emails the owner instantly and (once Make's Airtable token can see the CRM base) saves the lead to Airtable.
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`: Cloudflare Turnstile CAPTCHA (optional until set up).
+- `AIRTABLE_TOKEN`, `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE`: optional direct-to-Airtable path. Don't combine with the Make Airtable
+  step or each lead is saved twice.
 
 ### Airtable
-Base: "McInally's Plumbing & Heating CRM", table `Leads` (base ID `appO5TYh8bHyt07ky`). Set `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE=Leads`
-and an `AIRTABLE_TOKEN` (personal access token with `data.records:write` on that base) in Vercel env vars.
+Base: "McInally's Plumbing & Heating CRM", table `Leads` (base ID `appO5TYh8bHyt07ky`). Used by Make (and optionally the direct path above).
 Fields (exact names):
 Name, Phone, Postcode, In area (checkbox), Preferred time, Boiler age, Last service, Symptoms, Winter check score (number),
 Winter check level, UTM source, UTM medium, UTM campaign, UTM content, UTM term, fbclid, Page URL, Status.
