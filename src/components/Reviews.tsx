@@ -95,7 +95,7 @@ export function Reviews() {
                   <BadgeMark
                     badgeKey={d.key}
                     name={d.name}
-                    className="h-6"
+                    className={d.rowClass ?? "h-6"}
                     textClassName="font-display text-lg font-bold uppercase tracking-wide"
                   />
                 );

@@ -8,7 +8,7 @@ Everything editable lives in `src/lib/config.ts` (prices, dates, phone, reviews,
 Items marked `CONFIRM` need a real answer before launch.
 
 ## Trust logos
-Add the official logo files to `public/logos/` named `gas-safe`, `google`, `checkatrade`, `trustatrader`, `yell` (`.svg`, `.png`, `.webp` or `.jpg`).
+Add the official logo files to `public/logos/` named `gas-safe`, `google`, `checkatrade`, `trustatrader`, `yell` (WebP preferred, with a transparent background; `.svg`, `.png` or `.jpg` also work).
 The site detects them and swaps the text label for the logo automatically (trust bar + the "Also find us on" row under the reviews).
 Download them from each member dashboard / brand-assets page; use them unaltered and follow each brand's usage rules (Gas Safe's
 include showing the registration number, which the page does). Redeploy after adding files.

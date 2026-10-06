@@ -9,12 +9,12 @@ export function TrustBar() {
   const odd = badges.length % 2 === 1;
 
   return (
-    <section className="border-y-2 border-navy bg-line">
-      <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-px ${COLS[badges.length] ?? "sm:grid-cols-5"}`}>
+    <section className="border-y-2 border-navy bg-white">
+      <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-px bg-line ${COLS[badges.length] ?? "sm:grid-cols-5"}`}>
         {badges.map((b, i) => {
           const inner = (
             <>
-              <BadgeMark badgeKey={b.key} name={b.name} />
+              <BadgeMark badgeKey={b.key} name={b.name} className={b.logoClass} />
               {b.caption && (
                 <span className="text-xs font-semibold uppercase tracking-wide text-navy/70">{b.caption}</span>
               )}

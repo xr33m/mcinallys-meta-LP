@@ -115,12 +115,21 @@ export const reviews: Review[] = [
  * (gas-safe, google, checkatrade, trustatrader, yell; .svg, .png, .webp or .jpg). The site detects them
  * automatically and swaps the text label for the logo, so there is nothing to edit here.
  */
-export const trustBadges: { key: string; name: string; caption?: string; url?: string; show?: boolean }[] = [
-  { key: "gas-safe", name: "Gas Safe", caption: `Reg. ${flags.gasSafeNumber}`, url: "https://www.gassaferegister.co.uk/", show: flags.showGasSafe },
-  { key: "google", name: "Google", caption: `${site.googleRating} ★ · ${site.googleReviewCount} reviews`, url: site.googleReviewsUrl },
-  { key: "checkatrade", name: "Checkatrade", caption: "Approved tradesperson", url: site.checkatradeUrl },
-  { key: "trustatrader", name: "TrustATrader" },
-  { key: "yell", name: "Yell" },
+export const trustBadges: {
+  key: string;
+  name: string;
+  caption?: string;
+  url?: string;
+  show?: boolean;
+  /** Logo height in the trust bar / in the "Also find us on" row (Tailwind classes), tuned per logo shape. */
+  logoClass?: string;
+  rowClass?: string;
+}[] = [
+  { key: "gas-safe", name: "Gas Safe", caption: `Reg. ${flags.gasSafeNumber}`, url: "https://www.gassaferegister.co.uk/", show: flags.showGasSafe, logoClass: "h-12" },
+  { key: "google", name: "Google", caption: `${site.googleRating} ★ · ${site.googleReviewCount} Google reviews`, url: site.googleReviewsUrl, logoClass: "h-9" },
+  { key: "checkatrade", name: "Checkatrade", caption: "Approved tradesperson", url: site.checkatradeUrl, logoClass: "h-6 sm:h-7", rowClass: "h-5" },
+  { key: "trustatrader", name: "TrustATrader", logoClass: "h-12", rowClass: "h-9" },
+  { key: "yell", name: "Yell", logoClass: "h-8", rowClass: "h-6" },
 ];
 
 /** CONFIRM with Ryan: areas he's happy to name. */
