@@ -1,13 +1,12 @@
 import { flags, promises } from "@/lib/config";
-import { BoilerIllustration } from "./BoilerIllustration";
 import { ChecklistItems } from "./ChecklistItems";
 import { Check } from "./icons";
 
 export function Checklist({ price }: { price: number }) {
   return (
     <section className="px-4 py-14 sm:py-20">
-      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <div>
+      <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="lg:sticky lg:top-24">
           <p className="kicker">What you get</p>
           <h2 className="h-display mt-2 text-5xl sm:text-6xl">12 checks. One fixed price: £{price}.</h2>
           <p className="mt-4 max-w-md text-navy/70">
@@ -25,8 +24,6 @@ export function Checklist({ price }: { price: number }) {
               ))}
             </ul>
           </div>
-
-          <BoilerIllustration className="mx-auto mt-10 hidden w-full max-w-[260px] lg:block" />
         </div>
 
         <ChecklistItems />

@@ -10,6 +10,7 @@ import { Hero } from "@/components/Hero";
 import { LeadProvider } from "@/components/LeadProvider";
 import { Reviews } from "@/components/Reviews";
 import { Ryan } from "@/components/Ryan";
+import { Signs } from "@/components/Signs";
 import { StickyBar } from "@/components/StickyBar";
 import { TrustBar } from "@/components/TrustBar";
 import { WinterCheck } from "@/components/WinterCheck";
@@ -43,6 +44,7 @@ export default function Home() {
         <TrustBar />
         <Reviews />
         <Checklist price={price} />
+        <Signs price={price} />
         <WinterCheck price={price} />
         <Comparison price={price} />
         <Ryan />

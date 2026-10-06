@@ -1,5 +1,14 @@
-/** Simple flat illustration of a wall-mounted combi boiler, in the brand colours. Decorative. */
-export function BoilerIllustration({ className = "" }: { className?: string }) {
+const PINS: { n: number; x: number; y: number }[] = [
+  { n: 1, x: 40, y: 41 },   // strange noises (vents)
+  { n: 2, x: 204, y: 62 },  // error codes / lockouts (display)
+  { n: 3, x: 62, y: 150 },  // pressure keeps dropping (left dial)
+  { n: 4, x: 122, y: 284 }, // drips or damp (pipes)
+  { n: 5, x: 40, y: 224 },  // black marks / soot (casing)
+  { n: 6, x: 190, y: 150 }, // slow or uneven heating (right dial)
+];
+
+/** Flat illustration of a wall-mounted combi boiler in the brand colours, with numbered pins that match the "signs" list. */
+export function BoilerIllustration({ className = "", pins = false }: { className?: string; pins?: boolean }) {
   const navy = "#1a2332";
   return (
     <svg
@@ -51,16 +60,16 @@ export function BoilerIllustration({ className = "" }: { className?: string }) {
       {[64, 98, 132, 166].map((x, i) => (
         <rect key={x} x={x} y="210" width="28" height="14" rx="3" fill={i === 3 ? "#ffc107" : "#fff"} stroke={navy} strokeWidth="2.5" />
       ))}
-      {/* "12 checks" sticker */}
-      <g transform="translate(214 40) rotate(10)">
-        <circle r="38" fill="#ffc107" stroke={navy} strokeWidth="3" />
-        <text y="8" textAnchor="middle" fontSize="38" fontWeight="800" fill={navy} className="font-display">
-          12
-        </text>
-        <text y="26" textAnchor="middle" fontSize="13" fontWeight="800" fill={navy} letterSpacing="1.5" className="font-display">
-          CHECKS
-        </text>
-      </g>
+      {/* numbered pins */}
+      {pins &&
+        PINS.map((p) => (
+          <g key={p.n} transform={`translate(${p.x} ${p.y})`}>
+            <circle r="15" fill="#ffc107" stroke={navy} strokeWidth="3" />
+            <text y="7" textAnchor="middle" fontSize="20" fontWeight="800" fill={navy} className="font-display">
+              {p.n}
+            </text>
+          </g>
+        ))}
     </svg>
   );
 }

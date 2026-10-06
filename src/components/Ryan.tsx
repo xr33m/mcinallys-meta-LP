@@ -4,24 +4,44 @@ import { areas, engineerPhoto, site } from "@/lib/config";
 export function Ryan() {
   return (
     <section className="px-4 py-14 sm:py-20">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        {engineerPhoto ? (
-          <Image
-            src={engineerPhoto}
-            alt={`${site.owner}, owner of ${site.brand}`}
-            width={640}
-            height={720}
-            className="w-full border-2 border-navy object-cover shadow-hard-y"
-          />
-        ) : (
-          <div className="border-2 border-navy bg-brand p-6 shadow-hard">
-            <p className="font-display text-7xl font-extrabold uppercase leading-[0.9]">5+</p>
-            <p className="font-display text-2xl font-bold uppercase">years hands-on</p>
-            <hr className="my-4 border-navy/30" />
-            <p className="font-display text-3xl font-extrabold uppercase leading-none">Family run</p>
-            <p className="mt-1 text-sm font-semibold">You deal with {site.owner} directly. No call centre.</p>
+      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div className="relative">
+          <figure className="relative overflow-hidden border-2 border-navy bg-teal shadow-hard-y">
+            <div className="px-4 pt-14 sm:px-8 sm:pt-16">
+              <div className="relative">
+                {/* soft ground shadow under the van */}
+                <div className="absolute inset-x-[10%] -bottom-1 h-6 rounded-[50%] bg-navy/50 blur-md" aria-hidden />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/van.webp"
+                  alt={`The ${site.brand} van, with the number to call on the side`}
+                  width={1000}
+                  height={658}
+                  loading="lazy"
+                  className="relative mx-auto w-full max-w-[560px] drop-shadow-[0_6px_6px_rgba(0,0,0,0.25)]"
+                />
+              </div>
+            </div>
+            <figcaption className="mt-5 flex items-center justify-between gap-3 border-t-2 border-navy bg-navy px-4 py-2.5 font-display text-lg font-bold uppercase tracking-wide text-white sm:text-xl">
+              <span>Look out for the McInally&rsquo;s van</span>
+              <span className="hidden text-brand sm:inline">Edinburgh</span>
+            </figcaption>
+          </figure>
+          {/* sticker */}
+          <div className="absolute -left-2 -top-4 flex h-24 w-24 -rotate-6 flex-col items-center justify-center rounded-full border-2 border-navy bg-brand text-navy sm:-left-4 sm:h-28 sm:w-28">
+            <span className="font-display text-4xl font-extrabold leading-none sm:text-5xl">5+</span>
+            <span className="font-display text-xs font-extrabold uppercase leading-tight tracking-wider sm:text-sm">years<br />hands-on</span>
           </div>
-        )}
+          {engineerPhoto && (
+            <Image
+              src={engineerPhoto}
+              alt={`${site.owner}, owner of ${site.brand}`}
+              width={160}
+              height={160}
+              className="absolute -bottom-5 right-3 h-28 w-28 border-2 border-navy object-cover shadow-hard"
+            />
+          )}
+        </div>
 
         <div>
           <p className="kicker">Your engineer</p>
@@ -33,7 +53,8 @@ export function Ryan() {
             of hands-on experience, {site.owner} delivers reliable, honest work, on time and at a fair price.
           </p>
           <p className="mt-3 max-w-xl text-navy/70">
-            We cover {site.coverage}. Gas work is carried out by Gas Safe registered engineers.
+            You deal with {site.owner} directly, with no call centre. We cover {site.coverage}. Gas work is carried out by
+            Gas Safe registered engineers.
           </p>
           <p className="mt-5 font-display text-sm font-bold uppercase tracking-[0.15em] text-navy/70">Areas we cover include</p>
           <ul className="mt-2 flex max-w-xl flex-wrap gap-2">
