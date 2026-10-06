@@ -108,11 +108,17 @@ export const reviews: Review[] = [
 ];
 
 /** Drop a real photo into /public and set the path, e.g. "/ryan.jpg". */
-/** Directory listings. Add `logo: "/logos/yell.svg"` (file in /public) to show the official logo instead of text. */
-export const directories: { name: string; url?: string; logo?: string }[] = [
-  { name: "Checkatrade", url: site.checkatradeUrl },
-  { name: "TrustATrader" },
-  { name: "Yell" },
+/**
+ * Trust badges. Drop the OFFICIAL logo files into /public/logos using the `key` as the file name
+ * (gas-safe, google, checkatrade, trustatrader, yell; .svg, .png, .webp or .jpg). The site detects them
+ * automatically and swaps the text label for the logo, so there is nothing to edit here.
+ */
+export const trustBadges: { key: string; name: string; caption?: string; url?: string; show?: boolean }[] = [
+  { key: "gas-safe", name: "Gas Safe", caption: `Reg. ${flags.gasSafeNumber}`, url: "https://www.gassaferegister.co.uk/", show: flags.showGasSafe },
+  { key: "google", name: "Google", caption: `${site.googleRating} ★ · ${site.googleReviewCount} reviews`, url: site.googleReviewsUrl },
+  { key: "checkatrade", name: "Checkatrade", caption: "Approved tradesperson", url: site.checkatradeUrl },
+  { key: "trustatrader", name: "TrustATrader" },
+  { key: "yell", name: "Yell" },
 ];
 
 /** CONFIRM with Ryan: areas he's happy to name. */

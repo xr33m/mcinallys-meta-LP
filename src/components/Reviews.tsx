@@ -1,4 +1,5 @@
-import { directories, reviews, site } from "@/lib/config";
+import { reviews, site, trustBadges } from "@/lib/config";
+import { BadgeMark } from "./BadgeMark";
 import { Star } from "./icons";
 
 const SHOWN = 5;
@@ -21,7 +22,10 @@ export function Reviews() {
   return (
     <section className="bg-paper px-4 py-14 sm:py-20">
       <div className="mx-auto max-w-6xl">
-        <p className="kicker">Real Google reviews</p>
+        <p className="kicker flex items-center gap-2">
+          Real reviews on
+          <BadgeMark badgeKey="google" name="Google" className="h-5" textClassName="font-display text-sm font-bold uppercase tracking-[0.18em]" />
+        </p>
         <h2 className="h-display mt-2 max-w-3xl text-5xl sm:text-6xl">
           {site.googleReviewCount} Edinburgh customers. {site.googleRating} stars.
         </h2>
@@ -83,22 +87,26 @@ export function Reviews() {
           </a>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-display text-sm font-bold uppercase tracking-[0.15em] text-navy/70">Also find us on</span>
-            {directories.map((d) => {
-              const label = d.logo ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={d.logo} alt={d.name} className="h-5 w-auto" />
-              ) : (
-                d.name
-              );
-              const cls = "border-2 border-navy bg-white px-3 py-1 font-display text-lg font-bold uppercase tracking-wide";
-              return d.url ? (
-                <a key={d.name} href={d.url} target="_blank" rel="noopener noreferrer" className={`${cls} hover:bg-brand/30`}>
-                  {label}
-                </a>
-              ) : (
-                <span key={d.name} className={cls}>{label}</span>
-              );
-            })}
+            {trustBadges
+              .filter((d) => ["checkatrade", "trustatrader", "yell"].includes(d.key))
+              .map((d) => {
+                const cls = "flex min-h-10 items-center border-2 border-navy bg-white px-3 py-1";
+                const mark = (
+                  <BadgeMark
+                    badgeKey={d.key}
+                    name={d.name}
+                    className="h-6"
+                    textClassName="font-display text-lg font-bold uppercase tracking-wide"
+                  />
+                );
+                return d.url ? (
+                  <a key={d.key} href={d.url} target="_blank" rel="noopener noreferrer" className={`${cls} hover:bg-brand/30`}>
+                    {mark}
+                  </a>
+                ) : (
+                  <span key={d.key} className={cls}>{mark}</span>
+                );
+              })}
           </div>
         </div>
       </div>

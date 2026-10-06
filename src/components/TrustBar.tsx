@@ -1,26 +1,38 @@
-import { flags, site } from "@/lib/config";
+import { trustBadges } from "@/lib/config";
+import { BadgeMark } from "./BadgeMark";
 
+const COLS: Record<number, string> = { 3: "sm:grid-cols-3", 4: "sm:grid-cols-4", 5: "sm:grid-cols-5" };
+
+/** White strip so the official logos show in their own colours. */
 export function TrustBar() {
-  const items = [
-    flags.showGasSafe && { big: "Gas Safe", small: `Reg. ${flags.gasSafeNumber}` },
-    { big: "5.0 ★", small: `${site.googleReviewCount} Google reviews` },
-    { big: "Checkatrade", small: "+ TrustATrader + Yell" },
-    { big: "12 months", small: "Workmanship guarantee" },
-    { big: "Fully insured", small: "Family run · 5+ years" },
-  ].filter(Boolean) as { big: string; small: string }[];
+  const badges = trustBadges.filter((b) => b.show !== false);
+  const odd = badges.length % 2 === 1;
 
   return (
-    <section className="border-y-2 border-navy bg-brand">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-        {items.map((it, i) => (
-          <div
-            key={it.big}
-            className={`px-4 py-3 ${i > 0 ? "lg:border-l-2" : ""} ${i % 2 === 1 ? "border-l-2 sm:border-l-0" : ""} border-navy/30 ${i > 0 ? "lg:border-navy" : ""}`}
-          >
-            <p className="font-display text-2xl font-extrabold uppercase leading-none">{it.big}</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-navy/70">{it.small}</p>
-          </div>
-        ))}
+    <section className="border-y-2 border-navy bg-line">
+      <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-px ${COLS[badges.length] ?? "sm:grid-cols-5"}`}>
+        {badges.map((b, i) => {
+          const inner = (
+            <>
+              <BadgeMark badgeKey={b.key} name={b.name} />
+              {b.caption && (
+                <span className="text-xs font-semibold uppercase tracking-wide text-navy/70">{b.caption}</span>
+              )}
+            </>
+          );
+          const cls = `flex min-h-[84px] flex-col items-center justify-center gap-1.5 bg-white px-3 py-3 text-center ${
+            odd && i === badges.length - 1 ? "col-span-2 sm:col-span-1" : ""
+          }`;
+          return b.url ? (
+            <a key={b.key} href={b.url} target="_blank" rel="noopener noreferrer" className={`${cls} hover:bg-paper`}>
+              {inner}
+            </a>
+          ) : (
+            <div key={b.key} className={cls}>
+              {inner}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

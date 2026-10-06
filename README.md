@@ -7,6 +7,12 @@ Next.js 14 (App Router) + Tailwind v3, built for Meta Ads traffic and deployed o
 Everything editable lives in `src/lib/config.ts` (prices, dates, phone, reviews, checklist, FAQs, photo).
 Items marked `CONFIRM` need a real answer before launch.
 
+## Trust logos
+Add the official logo files to `public/logos/` named `gas-safe`, `google`, `checkatrade`, `trustatrader`, `yell` (`.svg`, `.png`, `.webp` or `.jpg`).
+The site detects them and swaps the text label for the logo automatically (trust bar + the "Also find us on" row under the reviews).
+Download them from each member dashboard / brand-assets page; use them unaltered and follow each brand's usage rules (Gas Safe's
+include showing the registration number, which the page does). Redeploy after adding files.
+
 ## Run
     npm install
     npm run dev
