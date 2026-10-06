@@ -11,6 +11,7 @@ export type Review = {
 
 export const site = {
   brand: "McInally's Plumbing & Heating",
+  legalName: "McInally's Plumbing and Heating LTD",
   owner: "Ryan",
   phoneDisplay: "07449 984820",
   phoneHref: "tel:+447449984820",
@@ -22,24 +23,23 @@ export const site = {
   checkatradeUrl:
     "https://www.checkatrade.com/trades/mcinallyplumbingandheating",
   googleRating: "5.0",
-  googleReviewCount: 76,
+  googleReviewCount: 86,
   coverage: "Edinburgh and up to 15 miles around",
 } as const;
 
 export const offer = {
   price: 80,
-  wasPrice: 100, // CONFIRM: must be a genuine recent standard price (CMA/ASA rules)
+  wasPrice: 100, // Confirmed as the genuine normal price
   endsISO: "2026-10-31T23:59:59+00:00",
   endsLabel: "31 October",
-  // CONFIRM: a real promise Ryan can keep. Shown on the form and thank-you page.
+  // Confirmed: Ryan can call back within 2 hours. Shown on the form and thank-you page.
   callbackWindow: "within 2 hours (8am–6pm, Mon–Sat)",
 } as const;
 
 export const flags = {
-  // CONFIRM: only switch on once the Gas Safe registration number is verified.
-  // The site's own hero does not currently mention Gas Safe.
-  showGasSafe: false,
-  gasSafeNumber: "",
+  // Gas Safe registration confirmed by the business owner.
+  showGasSafe: true,
+  gasSafeNumber: "SC894828",
 } as const;
 
 /** Paste real Google reviews here (verbatim, with permission). Empty = fallback card. */
