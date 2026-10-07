@@ -5,6 +5,7 @@ import "@fontsource/barlow-condensed/800.css";
 import "@fontsource-variable/inter";
 import "./globals.css";
 import { ClickTracker } from "@/components/ClickTracker";
+import { MetaPixel } from "@/components/MetaPixel";
 
 export const metadata: Metadata = {
   title: "Boiler Service in Edinburgh | McInally's Plumbing & Heating",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         {children}
         <ClickTracker />
+        <MetaPixel />
       </body>
     </html>
   );

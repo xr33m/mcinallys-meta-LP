@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { offer, site } from "@/lib/config";
 import { Check, Phone, WhatsApp } from "@/components/icons";
+import { LeadEvent } from "@/components/LeadEvent";
 
 export const metadata: Metadata = {
   title: "Request received | McInally's Plumbing & Heating",
@@ -16,6 +17,7 @@ const prep = [
 export default function ThankYou() {
   return (
     <main className="stripes flex flex-1 items-center justify-center bg-navy px-4 py-12">
+      <LeadEvent />
       <div className="w-full max-w-lg border-2 border-navy bg-white p-6 shadow-hard-y sm:p-8">
         <span className="flex h-14 w-14 items-center justify-center border-2 border-navy bg-brand text-navy">
           <Check className="h-7 w-7" />

@@ -6,8 +6,8 @@ declare global {
 }
 
 /**
- * Fires a Meta Pixel event if the Pixel is installed (a no-op until then).
- * The Pixel and its consent gate are added in the tracking phase.
+ * Fires a Meta Pixel event if the Pixel is loaded (a no-op otherwise: no Pixel ID set, or the visitor rejected cookies).
+ * The Pixel and its consent gate live in components/MetaPixel.tsx.
  */
 export function track(event: string, params?: Record<string, unknown>) {
   try {

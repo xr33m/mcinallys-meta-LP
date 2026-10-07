@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/lib/config";
+import { CookieSettingsButton } from "@/components/MetaPixel";
 
 export const metadata: Metadata = {
   title: "Privacy policy | McInally's Plumbing & Heating",
@@ -29,6 +30,13 @@ export default function Privacy() {
       <p className="mt-1">
         Our team, and the tools we use to store and message enquiries (for example our CRM, hosting and SMS/email
         providers), who process it on our behalf.
+      </p>
+      <h2 className="mt-6 font-display text-2xl font-bold uppercase text-navy">Cookies and advertising</h2>
+      <p className="mt-1">
+        If you press Accept on the cookie banner, we load the Meta (Facebook) Pixel. It tells Meta that you visited
+        this page or sent a request, so we can measure and improve our adverts. If you press Reject, it is not
+        loaded. We also keep the advert or link that brought you here in your browser for the length of your visit so
+        we can see which advert worked. You can change your choice at any time: <CookieSettingsButton />.
       </p>
       <h2 className="mt-6 font-display text-2xl font-bold uppercase text-navy">Your rights</h2>
       <p className="mt-1">

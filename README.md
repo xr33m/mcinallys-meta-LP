@@ -31,6 +31,9 @@ silently dropping a lead.
 - `LEAD_WEBHOOK_URL`: the Make webhook for the scenario "7. McInally's Lead → Instant Alert". **This is the only variable needed to
   go live.** Make emails the owner instantly and (once Make's Airtable token can see the CRM base) saves the lead to Airtable.
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`: Cloudflare Turnstile CAPTCHA (optional until set up).
+- `NEXT_PUBLIC_META_PIXEL_ID`: the Meta Pixel ID (digits only). Until it is set there is no Pixel and no cookie banner. When set, a
+  consent banner appears and the Pixel loads only after Accept; the `Lead` event fires on `/thank-you`. It is baked in at build time,
+  so redeploy after changing it.
 - `AIRTABLE_TOKEN`, `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE`: optional direct-to-Airtable path. Don't combine with the Make Airtable
   step or each lead is saved twice.
 
