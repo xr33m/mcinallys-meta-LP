@@ -9,7 +9,7 @@ import { captureAttribution } from "@/lib/attribution";
 import { useLead } from "./LeadProvider";
 import { Phone, WhatsApp } from "./icons";
 
-const SLOTS = ["Weekday daytime", "Weekday evening", "Saturday", "Any, you pick"];
+const SLOTS = ["Weekday daytime", "Any weekday, you pick"];
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 type Errors = Partial<Record<"name" | "phone" | "postcode" | "form", string>>;
@@ -24,7 +24,7 @@ export function BookingForm({ price }: { price: number }) {
   const router = useRouter();
   const { assessment } = useLead();
   const attribution = useRef<Record<string, string>>({});
-  const [slot, setSlot] = useState(SLOTS[3]);
+  const [slot, setSlot] = useState(SLOTS[SLOTS.length - 1]);
   const [errors, setErrors] = useState<Errors>({});
   const [busy, setBusy] = useState(false);
 

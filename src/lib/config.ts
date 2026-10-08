@@ -43,7 +43,7 @@ export const offer = {
   endsISO: "2026-10-31T23:59:59+00:00",
   endsLabel: "31 October",
   // Confirmed: Ryan can call back within 2 hours. Shown on the form and thank-you page.
-  callbackWindow: "within 2 hours (8am–6pm, Mon–Sat)",
+  callbackWindow: "within 2 hours (8am–6pm, Mon–Fri)",
 } as const;
 
 /**
