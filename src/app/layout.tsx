@@ -6,6 +6,7 @@ import "@fontsource-variable/inter";
 import "./globals.css";
 import { ClickTracker } from "@/components/ClickTracker";
 import { MetaPixel } from "@/components/MetaPixel";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: "Boiler Service in Edinburgh | McInally's Plumbing & Heating",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <ClickTracker />
         <MetaPixel />
+        <SpeedInsights />
       </body>
     </html>
   );
