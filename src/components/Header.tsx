@@ -5,12 +5,15 @@ export function Header() {
   return (
     <header className="bg-navy">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-        <div className="flex items-center gap-3">
-          <span className="bg-brand px-3 py-1 font-display text-2xl font-extrabold italic leading-none tracking-tight text-navy">
-            MCINALLY
+        <div className="flex flex-col leading-none">
+          <span className="font-display text-2xl font-extrabold uppercase tracking-tight text-teal-bright sm:text-3xl">
+            McInally
           </span>
-          <span className="hidden font-display text-sm font-semibold uppercase tracking-[0.2em] text-white/70 sm:block">
+          <span className="mt-0.5 font-display text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-bright/80 sm:text-xs">
             Plumbing · Heating
+          </span>
+          <span className="font-display text-[10px] font-semibold uppercase tracking-[0.18em] text-teal-bright/80 sm:text-xs">
+            Bathrooms · Kitchens
           </span>
         </div>
         <a
