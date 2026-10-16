@@ -35,6 +35,9 @@ body {
   .btn-yellow {
     @apply btn bg-brand text-navy shadow-hard hover:bg-brand-dark;
   }
+  .btn-outline-light {
+    @apply btn border-white/70 bg-white/5 text-white hover:bg-white/15;
+  }
   .stripes {
     background-image: repeating-linear-gradient(
       -45deg,

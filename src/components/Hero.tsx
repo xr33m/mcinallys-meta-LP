@@ -1,7 +1,7 @@
 import { flags, offer, site } from "@/lib/config";
 import { currentPrice } from "@/lib/offer";
 import { BookingForm } from "./BookingForm";
-import { Check, Star } from "./icons";
+import { Check, Phone, Star } from "./icons";
 
 export function Hero({ live }: { live: boolean }) {
   const price = currentPrice(live);
@@ -74,9 +74,14 @@ export function Hero({ live }: { live: boolean }) {
             </a>
           </div>
 
-          <a id="hero-cta" href="#book" className="btn-yellow mt-6 w-full lg:hidden">
-            Book my £{price} service
-          </a>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:hidden">
+            <a id="hero-cta" href="#book" className="btn-yellow flex-1">
+              Book my £{price} service
+            </a>
+            <a href={site.phoneHref} className="btn-outline-light flex-1">
+              <Phone className="h-5 w-5" /> Call {site.owner} now
+            </a>
+          </div>
 
           <ul className="mt-6 space-y-2 text-base">
             {[
