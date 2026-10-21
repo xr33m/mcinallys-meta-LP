@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   description: "Boiler service for Edinburgh homeowners. Gas Safe registered, family-run, 5.0★ on Google.",
   // Paid-traffic landing page: keep it out of search so it doesn't compete with the main site.
   robots: { index: false, follow: false },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {
