@@ -35,6 +35,14 @@ export function BookingForm({ price }: { price: number }) {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    // One id per submission, shared by the browser Pixel (thank-you page) and the server-side Conversions API
+    // call so Meta can deduplicate the two.
+    const eventId = crypto.randomUUID();
+    try {
+      window.sessionStorage.setItem("lead_event_id", eventId);
+    } catch {
+      /* private mode: the server event still goes out, it just won't pair with a browser event */
+    }
     const payload = {
       name: String(fd.get("name") ?? "").trim(),
       phone: String(fd.get("phone") ?? "").trim(),
@@ -45,6 +53,7 @@ export function BookingForm({ price }: { price: number }) {
       assessment,
       attribution: attribution.current,
       pageUrl: window.location.href,
+      eventId,
     };
 
     setBusy(true);
@@ -167,6 +176,9 @@ export function BookingForm({ price }: { price: number }) {
           <p className="mt-3 text-center text-xs text-navy/70">
             No payment now. No obligation. We only use your details to arrange your service, see our{" "}
             <Link href="/privacy" className="underline">privacy policy</Link>.
+          </p>
+          <p className="mt-1 text-center text-xs text-navy/70">
+            We share a scrambled version of your details with Meta to measure our adverts.
           </p>
         </form>
       </div>

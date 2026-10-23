@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -18,6 +19,7 @@ type Body = {
   } | null;
   attribution?: Record<string, string>;
   pageUrl?: string;
+  eventId?: string;
 };
 
 // UK mobile or landline, tolerant of spaces, +44 and 0044.
@@ -44,6 +46,76 @@ async function verifyTurnstile(token: string | undefined, ip: string) {
   });
   const data = (await res.json()) as { success?: boolean };
   return data.success === true;
+}
+
+const sha256 = (v: string) => createHash("sha256").update(v).digest("hex");
+
+/** UK number to Meta's format: digits only, country code 44, no leading 0 (07449... becomes 447449...). */
+function metaPhone(phone: string) {
+  let digits = phone.replace(/\D/g, "");
+  if (digits.startsWith("0044")) digits = digits.slice(2);
+  else if (digits.startsWith("0")) digits = `44${digits.slice(1)}`;
+  return digits;
+}
+
+/**
+ * Sends the `Lead` event to Meta's Conversions API. Same `event_id` as the browser Pixel event, so Meta
+ * deduplicates the pair. Never throws and never blocks the lead: any failure is only logged.
+ */
+async function sendMetaLead(opts: {
+  eventId?: string;
+  pageUrl: string;
+  name: string;
+  phone: string;
+  postcode: string;
+  fbclid?: string;
+  ip: string;
+  userAgent: string | null;
+}) {
+  const token = process.env.META_CAPI_TOKEN;
+  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  if (!token || !pixelId) return; // not configured yet
+
+  try {
+    const now = Date.now();
+    const firstName = opts.name.split(/\s+/)[0].toLowerCase();
+    const userData: Record<string, string> = {
+      ph: sha256(metaPhone(opts.phone)),
+      fn: sha256(firstName),
+      zp: sha256(opts.postcode.replace(/\s+/g, "").toLowerCase()),
+      country: sha256("gb"),
+    };
+    if (opts.ip !== "unknown") userData.client_ip_address = opts.ip;
+    if (opts.userAgent) userData.client_user_agent = opts.userAgent;
+    if (opts.fbclid) userData.fbc = `fb.1.${now}.${opts.fbclid}`;
+
+    const body: Record<string, unknown> = {
+      data: [
+        {
+          event_name: "Lead",
+          event_time: Math.floor(now / 1000),
+          event_id: opts.eventId,
+          action_source: "website",
+          event_source_url: opts.pageUrl,
+          user_data: userData,
+        },
+      ],
+    };
+    if (process.env.META_TEST_EVENT_CODE) body.test_event_code = process.env.META_TEST_EVENT_CODE;
+
+    const res = await fetch(
+      `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${encodeURIComponent(token)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(5000),
+      },
+    );
+    if (!res.ok) console.error(`[lead] Meta CAPI ${res.status}: ${await res.text()}`);
+  } catch (err) {
+    console.error("[lead] Meta CAPI failed:", err);
+  }
 }
 
 export async function POST(req: Request) {
@@ -154,6 +226,20 @@ export async function POST(req: Request) {
     );
   }
 
+  // Meta Conversions API: runs alongside the destinations above, but is not one of them, so it can never
+  // make a lead succeed or fail. It's only started for leads we actually accept.
+  const sendCapi = () =>
+    sendMetaLead({
+      eventId: typeof b.eventId === "string" ? b.eventId.slice(0, 100) : undefined,
+      pageUrl: lead.pageUrl,
+      name,
+      phone,
+      postcode,
+      fbclid: b.attribution?.fbclid,
+      ip,
+      userAgent: req.headers.get("user-agent"),
+    });
+
   if (jobs.length === 0) {
     if (process.env.NODE_ENV === "production") {
       console.error("[lead] No delivery destination configured. LEAD LOST:", lead);
@@ -163,10 +249,11 @@ export async function POST(req: Request) {
       );
     }
     console.log("[lead:dev]", lead);
+    await sendCapi();
     return NextResponse.json({ ok: true });
   }
 
-  const results = await Promise.allSettled(jobs);
+  const [results] = await Promise.all([Promise.allSettled(jobs), sendCapi()]);
   results.forEach((r) => r.status === "rejected" && console.error("[lead] delivery failed:", r.reason));
 
   if (results.every((r) => r.status === "rejected")) {

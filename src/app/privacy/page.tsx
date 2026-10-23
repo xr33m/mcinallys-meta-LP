@@ -38,6 +38,12 @@ export default function Privacy() {
         loaded. We also keep the advert or link that brought you here in your browser for the length of your visit so
         we can see which advert worked. You can change your choice at any time: <CookieSettingsButton />.
       </p>
+      <p className="mt-2">
+        When you send a request, we also share a scrambled (hashed) version of your phone number, first name and
+        postcode with Meta, sent from our server along with your IP address, browser type and the advert click
+        reference if you came from an advert. We do this to measure which adverts lead to requests. It is separate
+        from the cookie banner, so it happens whether you press Accept or Reject.
+      </p>
       <h2 className="mt-6 font-display text-2xl font-bold uppercase text-navy">Your rights</h2>
       <p className="mt-1">
         You can ask to see, correct or delete your information at any time by emailing{" "}
