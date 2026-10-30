@@ -40,8 +40,9 @@ export const site = {
 export const offer = {
   price: 80,
   wasPrice: 100, // Confirmed as the genuine normal price
-  endsISO: "2026-10-31T23:59:59+00:00",
-  endsLabel: "31 October",
+  // CONFIRM with Ryan before this goes live: the £80 price must genuinely be honoured until this date.
+  endsISO: "2026-11-30T23:59:59+00:00",
+  endsLabel: "30 November",
   // Confirmed: Ryan can call back within 2 hours. Shown on the form and thank-you page.
   callbackWindow: "within 2 hours (8am–6pm, Mon–Fri)",
 } as const;
@@ -51,8 +52,9 @@ export const offer = {
  * made-up scarcity as an unfair practice. Set to null to hide it. (Later we can drive this from Airtable bookings.)
  */
 export const capacity = {
-  slotsLeft: 12 as number | null,
-  period: "this month",
+  // Hidden until there is a real, current number from Ryan's diary (set e.g. 8 and "in November" to show it).
+  slotsLeft: null as number | null,
+  period: "in November",
 };
 
 export const flags = {
