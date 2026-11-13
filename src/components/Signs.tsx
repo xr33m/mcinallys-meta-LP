@@ -11,13 +11,13 @@ const signs = [
 
 export function Signs({ price }: { price: number }) {
   return (
-    <section className="bg-paper px-4 py-14 sm:py-20">
+    <section id="signs" className="bg-paper px-4 py-14 sm:py-20">
       <div className="mx-auto max-w-6xl">
         <p className="kicker">Know the signs</p>
         <h2 className="h-display mt-2 max-w-3xl text-5xl sm:text-6xl">6 signs your boiler needs a look</h2>
         <p className="mt-3 max-w-xl text-navy/70">
-          Most boiler problems give a warning first. These are the things to look out for. Spot one or more, and a service is the
-          cheapest way to find out why.
+          Some boiler problems give a warning first, and these are the things to look out for. Others, like carbon monoxide, give
+          none at all, which is why a yearly service matters even when everything seems fine.
         </p>
 
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">

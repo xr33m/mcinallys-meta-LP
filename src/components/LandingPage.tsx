@@ -10,13 +10,18 @@ import { LeadProvider } from "@/components/LeadProvider";
 import { Reviews } from "@/components/Reviews";
 import { Ryan } from "@/components/Ryan";
 import { Signs } from "@/components/Signs";
+import { WhatCanGoWrong } from "@/components/WhatCanGoWrong";
 import { StickyBar } from "@/components/StickyBar";
 import { TrustBar } from "@/components/TrustBar";
 import { WinterCheck } from "@/components/WinterCheck";
 import type { Angle } from "@/lib/angles";
 import { currentPrice, offerIsLive } from "@/lib/offer";
 
-/** The whole landing page. `angle` swaps only the hero headline and paragraph to match the ad. */
+/**
+ * The whole landing page. `angle` swaps only the hero headline and paragraph to match the ad.
+ * Section order walks a cold visitor up the awareness ladder: hook -> hidden problem -> warning signs ->
+ * the fix (what a service checks) -> check yours -> proof -> why now -> book.
+ */
 export function LandingPage({ angle }: { angle?: Angle }) {
   const live = offerIsLive();
   const price = currentPrice(live);
@@ -27,10 +32,11 @@ export function LandingPage({ angle }: { angle?: Angle }) {
       <main>
         <Hero live={live} angle={angle} />
         <TrustBar />
-        <Reviews />
-        <Checklist price={price} />
+        <WhatCanGoWrong price={price} />
         <Signs price={price} />
+        <Checklist price={price} />
         <WinterCheck price={price} />
+        <Reviews />
         <Comparison price={price} />
         <Ryan />
         <Faq />

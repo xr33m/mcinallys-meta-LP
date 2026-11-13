@@ -27,6 +27,18 @@ export const angles: Angle[] = [
     metaTitle: "Boiler service before winter in Edinburgh | McInally's Plumbing & Heating",
   },
   {
+    slug: "working-fine",
+    headline: "Working fine? It still needs servicing.",
+    sub: "A boiler can run for years without complaint and still be wearing out or burning poorly. A Gas Safe engineer checks it properly and you get a written record. If we find anything, you get an honest quote, not a hard sell.",
+    metaTitle: "Boiler service in Edinburgh | McInally's Plumbing & Heating",
+  },
+  {
+    slug: "cold-snap",
+    headline: "Is your boiler ready for the cold?",
+    sub: "Get it checked before the cold sets in, by a family-run Edinburgh firm. Fixed price. If we find anything, you get an honest quote, not a hard sell.",
+    metaTitle: "Boiler service before the cold in Edinburgh | McInally's Plumbing & Heating",
+  },
+  {
     slug: "mum",
     headline: "When was your mum's boiler last checked?",
     sub: "Book a boiler service for a parent or relative in Edinburgh. We call you to agree a time that suits them, and only quote for repairs if something needs fixing.",

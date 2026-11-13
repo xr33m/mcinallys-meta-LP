@@ -38,6 +38,9 @@ export const site = {
 } as const;
 
 export const offer = {
+  // Master switch. false = the page shows the standard fixed price (wasPrice) everywhere and hides the £80 countdown.
+  // Set to true (and confirm endsISO with Ryan) to bring the discounted offer back.
+  enabled: false,
   price: 80,
   wasPrice: 100, // Confirmed as the genuine normal price
   // CONFIRM with Ryan before this goes live: the £80 price must genuinely be honoured until this date.
@@ -168,6 +171,10 @@ export const checklist: { title: string; detail: string }[] = [
 
 export const faqs: { q: string; a: string }[] = [
   {
+    q: "How much is a boiler service?",
+    a: `£${offer.wasPrice}, fixed. That covers the full 12-point service and a written record of what was checked. If something needs repairing or a part needs replacing, that is quoted separately and you decide whether to go ahead.`,
+  },
+  {
     q: "What happens if you find a problem?",
     a: "We explain exactly what we found and give you a fair, no-pressure quote. You decide whether to go ahead. There's no obligation and no hard sell.",
   },
@@ -185,7 +192,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "How soon can you come?",
-    a: `We'll call you ${offer.callbackWindow} to agree a day and time that suits you. Autumn slots fill quickly, so the sooner you ask the better.`,
+    a: `We'll call you ${offer.callbackWindow} to agree a day and time that suits you. The sooner you ask, the sooner we can fit you in.`,
   },
   {
     q: "Is the work guaranteed?",

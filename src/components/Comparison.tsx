@@ -12,7 +12,7 @@ export function Comparison({ price }: { price: number }) {
     <section className="bg-navy px-4 py-14 text-white sm:py-20">
       <div className="mx-auto max-w-5xl">
         <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-brand">Why now</p>
-        <h2 className="h-display mt-2 text-5xl sm:text-6xl">Service it in October. Not in January.</h2>
+        <h2 className="h-display mt-2 text-5xl sm:text-6xl">Service it now. Not in January.</h2>
 
         <div className="mt-8 border-2 border-white/80">
           <div className="grid grid-cols-2 border-b-2 border-white/80 font-display text-lg font-extrabold uppercase tracking-wide sm:text-2xl">

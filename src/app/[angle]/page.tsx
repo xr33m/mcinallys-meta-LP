@@ -20,7 +20,7 @@ export function generateMetadata({ params }: { params: { angle: string } }): Met
     title: a.metaTitle,
     description: live
       ? `£${offer.price} (normally £${offer.wasPrice}) until ${offer.endsLabel}. Gas Safe registered, family-run, 5.0★ on Google.`
-      : "Gas Safe registered, family-run Edinburgh boiler service, 5.0★ on Google.",
+      : `£${offer.wasPrice} fixed-price boiler service in Edinburgh. Gas Safe registered, family-run, 5.0★ on Google.`,
   };
 }
 
