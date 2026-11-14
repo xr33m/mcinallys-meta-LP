@@ -9,7 +9,7 @@ const signs = [
   { t: "Slow or uneven heating", d: "Radiators cold at the top or bottom, or the house takes ages to warm up." },
 ];
 
-export function Signs({ price }: { price: number }) {
+export function Signs() {
   return (
     <section id="signs" className="bg-paper px-4 py-14 sm:py-20">
       <div className="mx-auto max-w-6xl">
@@ -41,7 +41,7 @@ export function Signs({ price }: { price: number }) {
             </ol>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <a href="#book" className="btn-yellow sm:flex-1">Book my £{price} service</a>
+              <a href="#book" className="btn-yellow sm:flex-1">Book my boiler service</a>
               <a href="#check" className="btn bg-white shadow-hard hover:bg-brand/30 sm:flex-1">Take the 30-second check</a>
             </div>
             <p className="mt-2 text-xs text-navy/70">

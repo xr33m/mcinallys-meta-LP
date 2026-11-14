@@ -171,10 +171,6 @@ export const checklist: { title: string; detail: string }[] = [
 
 export const faqs: { q: string; a: string }[] = [
   {
-    q: "How much is a boiler service?",
-    a: `£${offer.wasPrice}, fixed. That covers the full 12-point service and a written record of what was checked. If something needs repairing or a part needs replacing, that is quoted separately and you decide whether to go ahead.`,
-  },
-  {
     q: "What happens if you find a problem?",
     a: "We explain exactly what we found and give you a fair, no-pressure quote. You decide whether to go ahead. There's no obligation and no hard sell.",
   },

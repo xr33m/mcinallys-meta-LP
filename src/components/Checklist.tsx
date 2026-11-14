@@ -2,16 +2,16 @@ import { flags, promises } from "@/lib/config";
 import { ChecklistItems } from "./ChecklistItems";
 import { Check } from "./icons";
 
-export function Checklist({ price }: { price: number }) {
+export function Checklist() {
   return (
     <section className="px-4 py-14 sm:py-20">
       <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="lg:sticky lg:top-24">
-          <p className="kicker">The fix: what a service checks</p>
-          <h2 className="h-display mt-2 text-5xl sm:text-6xl">12 checks. One fixed price: £{price}.</h2>
+          <p className="kicker">The solution</p>
+          <h2 className="h-display mt-2 text-5xl sm:text-6xl">12 checks on every service.</h2>
           <p className="mt-4 max-w-md text-navy/70">
             {flags.showGasSafe ? `Carried out by a Gas Safe registered engineer (${flags.gasSafeNumber}). ` : ""}
-            You see exactly what you&rsquo;re paying for, and you get a written record of what was checked.
+            You see exactly what is checked, and you get a written record of it.
           </p>
 
           <div className="mt-6 border-2 border-navy bg-brand p-4 shadow-hard">

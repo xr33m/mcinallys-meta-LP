@@ -11,10 +11,10 @@ export function generateMetadata(): Metadata {
   return {
     title: live
       ? `£${offer.price} Boiler Service in Edinburgh | McInally's Plumbing & Heating`
-      : `Boiler Service in Edinburgh, £${offer.wasPrice} Fixed Price | McInally's Plumbing & Heating`,
+      : "Boiler Service in Edinburgh | McInally's Plumbing & Heating",
     description: live
       ? `Boiler service for Edinburgh homeowners: £${offer.price} (normally £${offer.wasPrice}) until ${offer.endsLabel}. Gas Safe registered, family-run, 5.0★ on Google.`
-      : `Boiler service for Edinburgh homeowners: £${offer.wasPrice} fixed price, 12 checks and a written record. Gas Safe registered, family-run, 5.0★ on Google.`,
+      : "Boiler service for Edinburgh homeowners: 12 checks by a Gas Safe engineer and a written record. Family-run, 5.0★ on Google.",
   };
 }
 

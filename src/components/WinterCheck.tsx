@@ -38,7 +38,7 @@ const RESULT = {
   },
 } as const;
 
-export function WinterCheck({ price }: { price: number }) {
+export function WinterCheck() {
   const { assessment, setAssessment } = useLead();
   const [step, setStep] = useState(0);
   const [started, setStarted] = useState(false);
@@ -71,9 +71,9 @@ export function WinterCheck({ price }: { price: number }) {
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <div>
           <p className="kicker">Free · 30 seconds</p>
-          <h2 className="h-display mt-2 text-5xl sm:text-6xl">Is your boiler ready for winter?</h2>
+          <h2 className="h-display mt-2 text-5xl sm:text-6xl">When was your boiler last serviced?</h2>
           <p className="mt-4 max-w-md text-navy/70">
-            Three taps, no sign-up. You get a simple winter-readiness result, and Ryan sees your answers if you book.
+            Most people can&rsquo;t remember. Three taps shows how yours scores, and Ryan sees your answers if you book.
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export function WinterCheck({ price }: { price: number }) {
               </button>
               <p className="mt-4 text-sm font-medium">
                 <a href="#book" className="font-bold text-teal-dark underline underline-offset-2">
-                  Skip it and book the £{price} service
+                  Skip it and book my service
                 </a>
               </p>
             </div>
@@ -208,7 +208,7 @@ export function WinterCheck({ price }: { price: number }) {
                 href="#book"
                 className="btn-yellow mt-4 w-full"
               >
-                Book my £{price} service →
+                Book my boiler service →
               </a>
               <p className="mt-3 text-center text-xs text-navy/70">
                 We&rsquo;ll attach your answers so Ryan knows what to look out for.{" "}

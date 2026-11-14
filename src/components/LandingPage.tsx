@@ -1,6 +1,5 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Checklist } from "@/components/Checklist";
-import { Comparison } from "@/components/Comparison";
 import { Faq } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
 import { Footer } from "@/components/Footer";
@@ -18,8 +17,8 @@ import { currentPrice, offerIsLive } from "@/lib/offer";
 
 /**
  * The whole landing page (one page for every ad).
- * Section order walks a cold visitor up the awareness ladder: hook -> hidden problem -> warning signs ->
- * the fix (what a service checks) -> check yours -> proof -> why now -> book.
+ * Section order walks a cold visitor up the awareness ladder: hook (DIC) -> hidden problem (PAS) -> warning signs ->
+ * the solution (what a service checks) -> check yours (DIC) -> proof -> book (DIC, price revealed here only).
  */
 export function LandingPage() {
   const live = offerIsLive();
@@ -29,20 +28,19 @@ export function LandingPage() {
       <AnnouncementBar live={live} price={price} />
       <Header />
       <main>
-        <Hero live={live} />
+        <Hero />
         <TrustBar />
-        <WhatCanGoWrong price={price} />
-        <Signs price={price} />
-        <Checklist price={price} />
-        <WinterCheck price={price} />
+        <WhatCanGoWrong />
+        <Signs />
+        <Checklist />
+        <WinterCheck />
         <Reviews />
-        <Comparison price={price} />
         <Ryan />
         <Faq />
         <FinalCta live={live} />
       </main>
       <Footer />
-      <StickyBar price={price} />
+      <StickyBar />
     </LeadProvider>
   );
 }

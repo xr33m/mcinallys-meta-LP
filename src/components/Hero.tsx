@@ -1,11 +1,9 @@
 import { flags, offer, site } from "@/lib/config";
-import { currentPrice } from "@/lib/offer";
 import { BookingForm } from "./BookingForm";
 import { Check, Phone, Star } from "./icons";
 
-export function Hero({ live }: { live: boolean }) {
-  const price = currentPrice(live);
-  const saving = offer.wasPrice - offer.price;
+/** Disrupt (headline) -> Intrigue (paragraph + what you get) -> Click (button). No price here: it is revealed at the final CTA. */
+export function Hero() {
   return (
     <section className="stripes bg-navy text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-12 pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14 lg:pb-16 lg:pt-14">
@@ -14,92 +12,56 @@ export function Hero({ live }: { live: boolean }) {
             Edinburgh homeowners
             {flags.showGasSafe && <span className="text-white/60"> · Gas Safe registered</span>}
           </p>
-          <h1
-            className="h-display mt-3 text-[2.6rem] sm:text-6xl lg:text-7xl"
-          >
-            Working fine? It still needs servicing.
+          <h1 className="h-display mt-3 text-[2.9rem] sm:text-7xl lg:text-8xl">
+            Working fine?
             <br />
-            {live ? (
-              <>
-                <span className="text-brand">£{offer.price}</span> till {offer.endsLabel}.
-              </>
-            ) : (
-              <>
-                Fixed price <span className="text-brand">£{price}</span>.
-              </>
-            )}
+            <span className="text-brand">It still needs servicing.</span>
           </h1>
           <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
-            A boiler can run for years without complaint and still be wearing out or burning poorly. A Gas Safe engineer checks it
-            properly and you get a written record. If we find anything, you get an honest quote, not a hard sell.
+            Warm radiators don&rsquo;t tell you if your boiler is burning safely or wearing out inside. A Gas Safe engineer checks
+            what you can&rsquo;t see.
           </p>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-6">
-            <div className="inline-flex items-stretch border-2 border-dashed border-brand bg-brand/10">
-              <div className="flex items-baseline gap-2 px-4 py-2">
-                <span className="font-display text-6xl font-extrabold leading-none text-brand">£{price}</span>
-                {live && (
-                  <span className="font-display text-2xl font-semibold text-white/60 line-through">
-                    £{offer.wasPrice}
-                  </span>
-                )}
-              </div>
-              <div className="flex flex-col justify-center border-l-2 border-dashed border-brand px-3 font-display text-sm font-bold uppercase leading-tight tracking-wider">
-                {live ? (
-                  <>
-                    Save £{saving}
-                    <span className="font-semibold text-white/70">Ends {offer.endsLabel}</span>
-                  </>
-                ) : (
-                  <>
-                    Fixed price
-                    <span className="font-semibold text-white/70">Full service</span>
-                  </>
-                )}
-              </div>
-            </div>
-
-            <a
-              href={site.googleReviewsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm"
-            >
-              <span className="flex text-brand">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5" />
-                ))}
-              </span>
-              <span>
-                <b className="text-base">{site.googleRating}</b> · {site.googleReviewCount} Google reviews
-              </span>
-            </a>
-          </div>
+          <ul className="mt-5 space-y-2.5 text-base sm:text-lg">
+            {[
+              `12-point check by a Gas Safe engineer (${flags.gasSafeNumber})`,
+              "A written service record for your peace of mind and warranty",
+              "An honest quote only if something needs fixing. No hard sell",
+              `No payment now. We call you ${offer.callbackWindow}`,
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-2.5">
+                <Check className="mt-1 h-5 w-5 shrink-0 text-brand" /> {t}
+              </li>
+            ))}
+          </ul>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:hidden">
             <a id="hero-cta" href="#book" className="btn-yellow flex-1">
-              Book my £{price} service
+              Book my boiler service
             </a>
             <a href={site.phoneHref} className="btn-outline-light flex-1">
               <Phone className="h-5 w-5" /> Call {site.owner} now
             </a>
           </div>
 
-          <ul className="mt-6 space-y-2 text-base">
-            {[
-              "Fully insured, with a 12-month workmanship guarantee",
-              "No payment now and no obligation",
-              `We call you ${offer.callbackWindow}`,
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-2.5">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" /> {t}
-              </li>
-            ))}
-          </ul>
-
+          <a
+            href={site.googleReviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 text-sm"
+          >
+            <span className="flex text-brand">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-5 w-5" />
+              ))}
+            </span>
+            <span>
+              <b className="text-base">{site.googleRating}</b> · {site.googleReviewCount} Google reviews
+            </span>
+          </a>
         </div>
 
-        <BookingForm price={price} />
+        <BookingForm />
       </div>
     </section>
   );

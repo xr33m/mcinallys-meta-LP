@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-export function BookingForm({ price }: { price: number }) {
+export function BookingForm() {
   const router = useRouter();
   const { assessment } = useLead();
   const attribution = useRef<Record<string, string>>({});
@@ -91,7 +91,7 @@ export function BookingForm({ price }: { price: number }) {
       )}
       <div className="border-2 border-navy bg-white text-navy shadow-hard-y">
         <div className="border-b-2 border-navy bg-brand px-5 py-3">
-          <h2 className="h-display text-3xl">Book your £{price} service</h2>
+          <h2 className="h-display text-3xl">Book your boiler service</h2>
           <p className="mt-1 text-sm font-semibold">Takes 30 seconds. We call you {offer.callbackWindow}.</p>
         </div>
 
@@ -171,7 +171,7 @@ export function BookingForm({ price }: { price: number }) {
           )}
 
           <button type="submit" disabled={busy} className="btn-yellow mt-5 w-full disabled:opacity-60">
-            {busy ? "Sending…" : `Book my £${price} service`}
+            {busy ? "Sending…" : "Book my boiler service"}
           </button>
           <p className="mt-3 text-center text-xs text-navy/70">
             No payment now. No obligation. We only use your details to arrange your service, see our{" "}
