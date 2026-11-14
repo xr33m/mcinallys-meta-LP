@@ -14,15 +14,14 @@ import { WhatCanGoWrong } from "@/components/WhatCanGoWrong";
 import { StickyBar } from "@/components/StickyBar";
 import { TrustBar } from "@/components/TrustBar";
 import { WinterCheck } from "@/components/WinterCheck";
-import type { Angle } from "@/lib/angles";
 import { currentPrice, offerIsLive } from "@/lib/offer";
 
 /**
- * The whole landing page. `angle` swaps only the hero headline and paragraph to match the ad.
+ * The whole landing page (one page for every ad).
  * Section order walks a cold visitor up the awareness ladder: hook -> hidden problem -> warning signs ->
  * the fix (what a service checks) -> check yours -> proof -> why now -> book.
  */
-export function LandingPage({ angle }: { angle?: Angle }) {
+export function LandingPage() {
   const live = offerIsLive();
   const price = currentPrice(live);
   return (
@@ -30,7 +29,7 @@ export function LandingPage({ angle }: { angle?: Angle }) {
       <AnnouncementBar live={live} price={price} />
       <Header />
       <main>
-        <Hero live={live} angle={angle} />
+        <Hero live={live} />
         <TrustBar />
         <WhatCanGoWrong price={price} />
         <Signs price={price} />

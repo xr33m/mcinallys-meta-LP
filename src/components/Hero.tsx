@@ -1,10 +1,9 @@
 import { flags, offer, site } from "@/lib/config";
-import type { Angle } from "@/lib/angles";
 import { currentPrice } from "@/lib/offer";
 import { BookingForm } from "./BookingForm";
 import { Check, Phone, Star } from "./icons";
 
-export function Hero({ live, angle }: { live: boolean; angle?: Angle }) {
+export function Hero({ live }: { live: boolean }) {
   const price = currentPrice(live);
   const saving = offer.wasPrice - offer.price;
   return (
@@ -16,11 +15,9 @@ export function Hero({ live, angle }: { live: boolean; angle?: Angle }) {
             {flags.showGasSafe && <span className="text-white/60"> · Gas Safe registered</span>}
           </p>
           <h1
-            className={`h-display mt-3 ${
-              angle ? "text-[2.6rem] sm:text-6xl lg:text-7xl" : "text-[3.2rem] sm:text-7xl lg:text-8xl"
-            }`}
+            className="h-display mt-3 text-[2.6rem] sm:text-6xl lg:text-7xl"
           >
-            {angle ? angle.headline : "Boiler service."}
+            Working fine? It still needs servicing.
             <br />
             {live ? (
               <>
@@ -33,9 +30,8 @@ export function Hero({ live, angle }: { live: boolean; angle?: Angle }) {
             )}
           </h1>
           <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
-            {angle
-              ? angle.sub
-              : "A proper annual service from a family-run Edinburgh firm, done before the cold weather arrives. Fixed price. If we find anything, you get an honest quote, not a hard sell."}
+            A boiler can run for years without complaint and still be wearing out or burning poorly. A Gas Safe engineer checks it
+            properly and you get a written record. If we find anything, you get an honest quote, not a hard sell.
           </p>
 
           <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-6">
