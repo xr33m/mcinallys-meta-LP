@@ -22,9 +22,6 @@ export const site = {
   owner: "Ryan",
   phoneDisplay: "07449 984820",
   phoneHref: "tel:+447449984820",
-  whatsappPhotoHref:
-    "https://wa.me/447449984820?text=" +
-    encodeURIComponent("Hi, I've booked the boiler service. Here's a photo of my boiler:"),
   whatsappHref:
     "https://wa.me/447449984820?text=" +
     encodeURIComponent("Hi, I'd like to book the boiler service."),

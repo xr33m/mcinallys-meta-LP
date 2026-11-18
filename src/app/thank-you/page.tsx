@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { offer, site } from "@/lib/config";
-import { Check, Phone, WhatsApp } from "@/components/icons";
+import { Check, Phone } from "@/components/icons";
 import { LeadEvent } from "@/components/LeadEvent";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const prep = [
   "Make sure the boiler is easy to get to (clear any boxes from the cupboard or area around it).",
   "Someone aged 18 or over needs to be home during the visit.",
-  "If you can, have a note of the boiler's make and age. Or just send us a photo of its label (below).",
+  "If you can, have a note of the boiler's make and age.",
 ];
 
 export default function ThankYou() {
@@ -39,13 +39,6 @@ export default function ThankYou() {
             ))}
           </ul>
         </div>
-
-        <a href={site.whatsappPhotoHref} className="btn mt-5 w-full bg-brand shadow-hard hover:bg-brand-dark">
-          <WhatsApp className="h-5 w-5" /> WhatsApp a photo of your boiler
-        </a>
-        <p className="mt-2 text-center text-xs text-navy/70">
-          Saves a wasted trip. We&rsquo;ll know exactly what we&rsquo;re working on before we arrive.
-        </p>
 
         <p className="mt-6 text-sm text-navy/70">Need us sooner? Reach us directly:</p>
         <a href={site.phoneHref} className="btn mt-2 w-full bg-navy text-white">
